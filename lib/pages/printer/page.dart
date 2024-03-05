@@ -36,7 +36,7 @@ class _PrinterPageState extends State<PrinterPage> {
     });
 
     // subscription to listen change status of bluetooth connection
-    PrinterManager.instance.stateBluetooth.listen((status) {
+    c.bluetoothSubscription = PrinterManager.instance.stateBluetooth.listen((status) {
       log(' ----------------- status bt $status ------------------ ');
       if (status == BTStatus.connected) {
         setState(() {
@@ -61,7 +61,7 @@ class _PrinterPageState extends State<PrinterPage> {
       }
     });
     //  PrinterManager.instance.stateUSB is only supports on Android
-    PrinterManager.instance.stateUSB.listen((status) {
+    c.usbSubscription = PrinterManager.instance.stateUSB.listen((status) {
       log(' ----------------- status usb $status ------------------ ');
 
       if (Platform.isAndroid) {
@@ -73,18 +73,23 @@ class _PrinterPageState extends State<PrinterPage> {
         }
       }
     });
+  }
 
-    //  PrinterManager.instance.stateUSB is only supports on Android
-    PrinterManager.instance.stateTCP.listen((status) {
-      log(' ----------------- status tcp $status ------------------ ');
-    });
+  @override
+  void dispose() {
+    c.bluetoothSubscription.cancel();
+    c.usbSubscription.cancel();
+    if (c.isConnected) {
+      c.printerManager.disconnect(type: c.defaultPrinterType);
+    }
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Pos Plugin Platform example app'),
+        title: const Text('Printer Page'),
       ),
       body: Center(
         child: Container(

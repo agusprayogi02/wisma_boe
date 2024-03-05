@@ -14,6 +14,9 @@ class PrinterController {
   final portController = TextEditingController(text: '9100');
   BluetoothPrinterModel? selectedPrinter;
 
+  late StreamSubscription bluetoothSubscription;
+  late StreamSubscription usbSubscription;
+
   void scan() {
     devices.clear();
     printerManager.discovery(type: defaultPrinterType, isBle: isBle).listen((device) {
