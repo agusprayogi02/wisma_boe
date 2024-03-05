@@ -64,4 +64,8 @@ class HomeController {
       }
     });
   }
+
+  void goPrinterPage(BuildContext context) {
+    Navigator.pushNamed(context, "/printer");
+  }
 }

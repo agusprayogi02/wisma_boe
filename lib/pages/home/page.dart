@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(4),
                         crossAxisCount: 2,
                         childAspectRatio: 4,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
                         children: [
                           ElevatedButton(
                             onPressed: controller.tagRead,
@@ -73,6 +73,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(12),
+        child: ElevatedButton(
+          style:
+              ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
+          onPressed: () => controller.goPrinterPage(context),
+          child: const Text('Thermal Bluetooth'),
         ),
       ),
     );

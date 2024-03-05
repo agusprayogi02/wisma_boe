@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'pages/home/page.dart';
 import 'pages/login/pages.dart';
+import 'pages/printer/page.dart';
 import 'pages/register/page.dart';
 
 void main() {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const HomePage(),
         "/login": (context) => const LoginPage(),
         "/register": (context) => const RegisterPage(),
+        "/printer": (context) => const PrinterPage(),
       },
     );
   }
