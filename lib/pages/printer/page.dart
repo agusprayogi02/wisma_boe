@@ -12,6 +12,8 @@ part 'controller.dart';
 class PrinterPage extends StatefulWidget {
   const PrinterPage({super.key});
 
+  static const String route = '/printer';
+
   @override
   State<PrinterPage> createState() => _PrinterPageState();
 }

@@ -8,6 +8,8 @@ part 'controller.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  static const String route = '/';
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
