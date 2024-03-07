@@ -3,6 +3,7 @@ import 'package:wisma_boe/pages/home/page.dart';
 import 'package:wisma_boe/pages/login/page.dart';
 import 'package:wisma_boe/pages/printer/page.dart';
 import 'package:wisma_boe/pages/qr_scanner/page.dart';
+import 'package:wisma_boe/pages/read_nfc/page.dart';
 import 'package:wisma_boe/pages/register/page.dart';
 
 class AppRouter {
@@ -12,5 +13,6 @@ class AppRouter {
     RegisterPage.route: (context) => const RegisterPage(),
     PrinterPage.route: (context) => const PrinterPage(),
     QrScannerPage.route: (context) => const QrScannerPage(),
+    ReadNfcPage.route: (context) => const ReadNfcPage(),
   };
 }

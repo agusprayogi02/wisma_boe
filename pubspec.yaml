@@ -38,6 +38,7 @@ dependencies:
   hex: ^0.2.0 # untuk konversi hex
   thermal_printer: ^1.0.5 # untuk printer thermal
   mobile_scanner: ^4.0.1 # untuk qrcode scanner
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
