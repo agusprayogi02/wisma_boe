@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wisma_boe/utils/home_notification_utils.dart';
 
 class GuestPage extends StatefulWidget {
@@ -74,9 +73,7 @@ class _GuestPageState extends State<GuestPage> {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  print(GoogleFonts.poppins().fontFamily);
-                },
+                onTap: () {},
                 child: Container(
                     height: 50,
                     alignment: Alignment.center,
