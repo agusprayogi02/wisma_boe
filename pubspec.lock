@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      sha256: "49af28382aefc53562459104f64d16b9dfd1e8ef68c862d5af436cc8356ce5a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.1"
   enum_to_string:
     dependency: transitive
     description:
@@ -312,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   js:
     dependency: transitive
     description:
@@ -412,10 +428,10 @@ packages:
     dependency: "direct main"
     description:
       name: nfc_manager
-      sha256: d6a4cc6a8a37119b1e8cc242392c0c87623d319cf1423f6a90cb998a52970baf
+      sha256: "25b3ed2a3806619e9a44416964b29db178f94bd22651941fd99cbc15687f08c5"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.0"
   nm:
     dependency: transitive
     description:
@@ -464,6 +480,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.4"
+  reactive_forms:
+    dependency: "direct main"
+    description:
+      name: reactive_forms
+      sha256: b7d64d8fe45c19f506c762e219f4c6a3bdcfc4842d6fba98f866be5fca75d8e5
+      url: "https://pub.dev"
+    source: hosted
+    version: "16.1.1"
   rxdart:
     dependency: transitive
     description:
@@ -569,10 +593,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "464f5674532865248444b4c3daca12bd9bf2d7c47f759ce2617986e7229494a8"
+      sha256: "8cb58b45c47dcb42ab3651533626161d6b67a2921917d8d429791f76972b3480"
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.0"
+    version: "5.3.0"
   xml:
     dependency: transitive
     description:

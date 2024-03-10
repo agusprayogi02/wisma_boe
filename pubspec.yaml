@@ -39,6 +39,8 @@ dependencies:
   thermal_printer: ^1.0.5 # untuk printer thermal
   mobile_scanner: ^4.0.1 # untuk qrcode scanner
   image_picker: ^1.0.7
+  dio: ^5.4.1
+  reactive_forms: ^16.1.1
 
 dev_dependencies:
   flutter_test:

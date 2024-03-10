@@ -14,17 +14,20 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 100),
-            const Text('Login'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Login'),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              const Text('Login'),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );
