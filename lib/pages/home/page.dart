@@ -8,7 +8,7 @@ part 'controller.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  static const String route = '/';
+  static const String route = '/home';
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 12),
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamed(context, '/qr-scanner');
@@ -50,6 +51,13 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, '/printer');
             },
             child: const Text('Printer'),
+          ),
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/room');
+            },
+            child: const Text('Room'),
           ),
         ],
       ),

@@ -5,7 +5,7 @@ import 'package:wisma_boe/pages/printer/page.dart';
 import 'package:wisma_boe/pages/qr_scanner/page.dart';
 import 'package:wisma_boe/pages/read_nfc/page.dart';
 import 'package:wisma_boe/pages/register/page.dart';
-import 'package:wisma_boe/pages/room/room_page.dart';
+import 'package:wisma_boe/pages/room/page.dart';
 
 class AppRouter {
   static Map<String, WidgetBuilder> routes = {
