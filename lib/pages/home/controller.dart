@@ -2,7 +2,7 @@ part of 'page.dart';
 
 class HomeController {
   ValueNotifier<dynamic> result = ValueNotifier(null);
-  final local = UserSharedUtils();
+  final local = UserSharedUtils.instance;
 
   void logOut(BuildContext context) {
     local.remove().then((val) {

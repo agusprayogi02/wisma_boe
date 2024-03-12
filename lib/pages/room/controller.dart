@@ -2,18 +2,14 @@ part of 'page.dart';
 
 class RoomController {
   final _dio = NetworkUtils.instance.dio;
-  late final UserSharedUtils local;
+  final local = UserSharedUtils.instance;
   final _nameController = TextEditingController();
   final _capacityController = TextEditingController();
   final _noteController = TextEditingController();
 
-  RoomController() {
-    local = UserSharedUtils();
-  }
-
   Future<List<dynamic>> getRooms() async {
     try {
-      final token = (await local.getUser())['token'];
+      final token = (await local.getUser())?.token;
       _dio.options.headers['Authorization'] = 'Bearer $token';
       final response = await _dio.get(
         'room/user',
@@ -94,14 +90,14 @@ class RoomController {
       showDialog(
           context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
       final user = (await local.getUser());
-      _dio.options.headers['Authorization'] = 'Bearer ${user['token']}';
+      _dio.options.headers['Authorization'] = 'Bearer ${user?.token}';
       _dio.post(
         'room',
         data: {
           'name': _nameController.text,
           'capacity': int.parse(_capacityController.text),
           'note': _noteController.text,
-          'wisma_id': user['wisma'][0]['id'],
+          'wisma_id': user?.wisma?.first.id,
         },
       ).then((value) {
         context.hideLoading();

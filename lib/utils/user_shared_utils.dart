@@ -1,29 +1,28 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wisma_boe/Model/login_model/login_model.dart';
 
 class UserSharedUtils {
   late final SharedPreferences _preferences;
   final String key = "user-key-broo";
 
-  UserSharedUtils() {
-    _init();
-  }
+  UserSharedUtils._();
 
-  _init() async {
+  static final instance = UserSharedUtils._();
+
+  Future<void> init() async {
     _preferences = await SharedPreferences.getInstance();
   }
 
   Future<void> setUser(dynamic value) async {
-    await _preferences.setString(key, jsonEncode(value));
+    final model = LoginModel.fromMap(value);
+    await _preferences.setString(key, model.toJson());
   }
 
   bool check() => _preferences.containsKey(key);
 
-  Future<dynamic> getUser() async {
+  Future<LoginModel?> getUser() async {
     final shared = await SharedPreferences.getInstance();
-    return check() ? jsonDecode(shared.getString(key)!) : null;
+    return check() ? LoginModel.fromJson(shared.getString(key)!) : null;
   }
 
   Future<void> remove() async {

@@ -5,7 +5,7 @@ class LoginController {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final userLocal = UserSharedUtils();
+  final userLocal = UserSharedUtils.instance;
 
   void login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -28,11 +28,11 @@ class LoginController {
         "email": emailController.text,
         "password": passwordController.text,
       }).then((value) {
-        Navigator.pop(context);
+        context.hideLoading();
         userLocal.setUser(value.data['data']);
         Navigator.pushReplacementNamed(context, HomePage.route);
       }).catchError((e) {
-        Navigator.pop(context);
+        context.hideLoading();
         showDialog(
           context: context,
           builder: (context) => const AlertDialog(
