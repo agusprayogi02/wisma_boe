@@ -6,9 +6,11 @@ import 'package:wisma_boe/pages/qr_scanner/page.dart';
 import 'package:wisma_boe/pages/read_nfc/page.dart';
 import 'package:wisma_boe/pages/register/page.dart';
 import 'package:wisma_boe/pages/room/page.dart';
+import 'package:wisma_boe/pages/splash/page.dart';
 
 class AppRouter {
   static Map<String, WidgetBuilder> routes = {
+    SplashPage.route: (context) => const SplashPage(),
     HomePage.route: (context) => const HomePage(),
     LoginPage.route: (context) => const LoginPage(),
     RegisterPage.route: (context) => const RegisterPage(),

@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 def compileSdkV = 34
 def ndkV = "24.0.8215888"
-def minSkdV = 21
+def minSkdV = 22
 
 android {
     namespace "boe.wisma.wisma_boe"

@@ -44,7 +44,8 @@ class _ReadNfcPageState extends State<ReadNfcPage> {
                         child: SingleChildScrollView(
                           child: ValueListenableBuilder<dynamic>(
                             valueListenable: controller.result,
-                            builder: (context, value, _) => Text('${value ?? ''}'),
+                            builder: (context, value, _) =>
+                                Text('${value ?? ''}'),
                           ),
                         ),
                       ),
@@ -80,8 +81,8 @@ class _ReadNfcPageState extends State<ReadNfcPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(12),
         child: ElevatedButton(
-          style:
-              ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue, foregroundColor: Colors.white),
           onPressed: () => controller.goPrinterPage(context),
           child: const Text('Thermal Bluetooth'),
         ),

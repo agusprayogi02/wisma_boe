@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 part 'controller.dart';
 
@@ -17,8 +19,8 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   void initState() {
-    super.initState();
     c = RoomController();
+    super.initState();
   }
 
   @override
@@ -59,8 +61,20 @@ class _RoomPageState extends State<RoomPage> {
             itemBuilder: (context, index) {
               final item = snapshot.data![index];
               return ListTile(
+                leading: IconButton(
+                  onPressed: () {},
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                  ),
+                  icon: const Icon(Icons.edit_rounded),
+                ),
                 title: Text(item['name']),
                 subtitle: Text(item['wisma']['name']),
+                trailing: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.print_rounded),
+                ),
               );
             },
           );

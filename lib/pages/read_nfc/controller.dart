@@ -28,8 +28,10 @@ class HomeController {
       NdefMessage message = NdefMessage([
         NdefRecord.createText('Hello World!'),
         NdefRecord.createUri(Uri.parse('https://flutter.dev')),
-        NdefRecord.createMime('text/plain', Uint8List.fromList('Hello'.codeUnits)),
-        NdefRecord.createExternal('com.example', 'mytype', Uint8List.fromList('mydata'.codeUnits)),
+        NdefRecord.createMime(
+            'text/plain', Uint8List.fromList('Hello'.codeUnits)),
+        NdefRecord.createExternal(
+            'com.example', 'mytype', Uint8List.fromList('mydata'.codeUnits)),
       ]);
 
       try {

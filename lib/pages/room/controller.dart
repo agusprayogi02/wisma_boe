@@ -1,13 +1,20 @@
 part of 'page.dart';
 
 class RoomController {
-  final _dio = NetworkUtils.dio();
+  final _dio = NetworkUtils.instance.dio;
+  late final UserSharedUtils local;
   final _nameController = TextEditingController();
   final _capacityController = TextEditingController();
   final _noteController = TextEditingController();
 
+  RoomController() {
+    local = UserSharedUtils();
+  }
+
   Future<List<dynamic>> getRooms() async {
     try {
+      final token = (await local.getUser())['token'];
+      _dio.options.headers['Authorization'] = 'Bearer $token';
       final response = await _dio.get(
         'room/user',
         queryParameters: {
@@ -27,32 +34,35 @@ class RoomController {
       builder: (context) => AlertDialog(
         title: const Text('Tambah Ruangan'),
         content: IntrinsicHeight(
-          child: Column(
-            children: [
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Nama Ruangan',
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Nama Ruangan',
+                  ),
+                  keyboardType: TextInputType.text,
+                  controller: _nameController,
                 ),
-                keyboardType: TextInputType.text,
-                controller: _nameController,
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Kapasitas',
+                const SizedBox(height: 8),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Kapasitas',
+                  ),
+                  keyboardType: TextInputType.number,
+                  controller: _capacityController,
                 ),
-                keyboardType: TextInputType.number,
-                controller: _capacityController,
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Catatan',
+                const SizedBox(height: 8),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Catatan',
+                  ),
+                  controller: _noteController,
+                  maxLines: 5,
                 ),
-                controller: _noteController,
-                maxLines: 5,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         actions: [
@@ -70,10 +80,6 @@ class RoomController {
               ),
               const Spacer(),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                ),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
@@ -85,13 +91,38 @@ class RoomController {
       ),
     );
     if (rest is bool && rest) {
-      await _dio.post(
+      showDialog(
+          context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
+      final user = (await local.getUser());
+      _dio.options.headers['Authorization'] = 'Bearer ${user['token']}';
+      _dio.post(
         'room',
         data: {
           'name': _nameController.text,
           'capacity': int.parse(_capacityController.text),
+          'note': _noteController.text,
+          'wisma_id': user['wisma'][0]['id'],
         },
-      );
+      ).then((value) {
+        context.hideLoading();
+      }).catchError((e) {
+        context.hideLoading();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(e.toString()),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      });
     }
     return rest != null;
   }

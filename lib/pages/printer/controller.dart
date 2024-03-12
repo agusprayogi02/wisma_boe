@@ -19,7 +19,9 @@ class PrinterController {
 
   void scan() {
     devices.clear();
-    printerManager.discovery(type: defaultPrinterType, isBle: isBle).listen((device) {
+    printerManager
+        .discovery(type: defaultPrinterType, isBle: isBle)
+        .listen((device) {
       devices.add(BluetoothPrinterModel(
         deviceName: device.name,
         address: device.address,
@@ -60,8 +62,10 @@ class PrinterController {
   void selectDevice(BluetoothPrinterModel device) async {
     if (selectedPrinter != null) {
       if ((device.address != selectedPrinter!.address) ||
-          (device.typePrinter == PrinterType.usb && selectedPrinter!.vendorId != device.vendorId)) {
-        await PrinterManager.instance.disconnect(type: selectedPrinter!.typePrinter);
+          (device.typePrinter == PrinterType.usb &&
+              selectedPrinter!.vendorId != device.vendorId)) {
+        await PrinterManager.instance
+            .disconnect(type: selectedPrinter!.typePrinter);
       }
     }
 
@@ -79,8 +83,8 @@ class PrinterController {
     bytes += generator.setGlobalCodeTable('CP1252');
     bytes += generator.text('Code Kamar Wisma Bima Hall',
         styles: const PosStyles(align: PosAlign.center));
-    bytes +=
-        generator.qrcode("BH-103", size: QRSize.Size8, cor: QRCorrection.H, align: PosAlign.center);
+    bytes += generator.qrcode("BH-103",
+        size: QRSize.Size8, cor: QRCorrection.H, align: PosAlign.center);
     _printEscPos(bytes, generator);
   }
 
@@ -125,7 +129,8 @@ class PrinterController {
         break;
       default:
     }
-    if (bluetoothPrinter.typePrinter == PrinterType.bluetooth && Platform.isAndroid) {
+    if (bluetoothPrinter.typePrinter == PrinterType.bluetooth &&
+        Platform.isAndroid) {
       if (printerManager.currentStatusBT == BTStatus.connected) {
         print('printing...');
         printerManager.send(type: bluetoothPrinter.typePrinter, bytes: bytes);

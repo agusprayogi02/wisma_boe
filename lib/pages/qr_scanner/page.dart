@@ -59,7 +59,8 @@ class _QrScannerPageState extends State<QrScannerPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: ScannedBarcodeLabel(barcodes: c.scannerController.barcodes),
+                  child: ScannedBarcodeLabel(
+                      barcodes: c.scannerController.barcodes),
                 ),
               ),
               onDetect: (BarcodeCapture barcodes) {
@@ -77,10 +78,12 @@ class _QrScannerPageState extends State<QrScannerPage> {
                           itemBuilder: (context, index) {
                             final barcode = barcodes.barcodes[index];
                             return ListTile(
-                              title: Text(barcode.displayValue ?? 'No display value.'),
+                              title: Text(
+                                  barcode.displayValue ?? 'No display value.'),
                               subtitle: Text("Type: ${barcode.format.name}"),
-                              leading:
-                                  barcodes.image != null ? Image.memory(barcodes.image!) : null,
+                              leading: barcodes.image != null
+                                  ? Image.memory(barcodes.image!)
+                                  : null,
                             );
                           },
                         ),

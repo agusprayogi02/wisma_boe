@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hex/hex.dart';
-import 'package:nfc_manager/nfc_manager.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 part 'controller.dart';
 
@@ -28,6 +26,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wisma Boe'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.logOut(context);
+            },
+            icon: const Icon(Icons.logout),
+            tooltip: "Keluar",
+          ),
+        ],
       ),
       body: Column(
         children: [

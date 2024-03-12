@@ -1,12 +1,13 @@
+import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 
 class NetworkUtils {
-  static const String BASE_URL = 'https://above-vulture-monthly.ngrok-free.app/';
-
-  Dio dio() {
-    final dio = Dio(
+  late final Alice alice;
+  late final Dio dio;
+  NetworkUtils._() {
+    alice = Alice(showShareButton: true, showNotification: true);
+    dio = Dio(
       BaseOptions(
-        // baseUrl: 'https://cuaca-gempa-rest-api.vercel.app/',
         baseUrl: BASE_URL,
         sendTimeout: const Duration(minutes: 3),
         connectTimeout: const Duration(minutes: 3),
@@ -16,7 +17,8 @@ class NetworkUtils {
           'Content-Type': 'application/json',
         },
       ),
-    );
-    return dio;
+    )..interceptors.add(alice.getDioInterceptor());
   }
+  static const String BASE_URL = 'https://above-vulture-monthly.ngrok-free.app/api/';
+  static final NetworkUtils instance = NetworkUtils._();
 }
