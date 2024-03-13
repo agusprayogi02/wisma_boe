@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:wisma_boe/utils/home_notification_utils.dart';
+import 'package:wisma_boe/pages/guest/notification.dart';
+import 'package:wisma_boe/pages/guest/room_info_not_null.dart';
+import 'package:wisma_boe/pages/guest/room_info_null.dart';
 
 class GuestPage extends StatefulWidget {
-  const GuestPage({super.key});
+  const GuestPage({super.key, required this.guestName, this.isNullroomInfo = false});
+
+  final String guestName;
+  final bool isNullroomInfo;
 
   @override
   State<GuestPage> createState() => _GuestPageState();
@@ -37,61 +41,19 @@ class _GuestPageState extends State<GuestPage> {
                 ),
               ),
               const SizedBox(height: 5),
-              const Text(
-                'Nama Tamu', //Dinamis
-                style: TextStyle(fontSize: 20),
+              Text(
+                widget.guestName, //Dinamis
+                style: const TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Informasi Kamar',
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 5),
               Container(
-                height: 100,
-                padding: const EdgeInsets.all(20),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                  boxShadow: List<BoxShadow>.generate(
-                      3,
-                      (index) => BoxShadow(
-                          color: Colors.grey.shade200,
-                          blurRadius: 4,
-                          spreadRadius: 1,
-                          offset: const Offset(0, 0))),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Kamar belum ditemukan, silahkan pindai QR Code.',
-                      style: TextStyle(color: Colors.grey.shade600),
-                    )
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  print(GoogleFonts.poppins().fontFamily);
-                },
-                child: Container(
-                    height: 50,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 37, 197, 19),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-                    ),
-                    child: const Text(
-                      'Pindai',
-                      style:
-                          TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
-                    )),
+                child: widget.isNullroomInfo
+                    ? const RoomInfoNull()
+                    : const RoomInfoNotNull(
+                        hallName: 'Wisma Kendedes',
+                        roomNumber: '101',
+                        roomType: 'Double',
+                        nameEvent: 'Upskilling '),
               ),
               const SizedBox(height: 20),
               const Text(
