@@ -9,21 +9,7 @@ class LoginController {
 
   void login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      showDialog(
-        context: context,
-        builder: (context) => const AlertDialog(
-          content: PopScope(
-            canPop: false,
-            child: IntrinsicHeight(
-              child: Column(
-                children: [
-                  CircularProgressIndicator(),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+      context.showLoading();
       _dio.post("login", data: {
         "email": emailController.text,
         "password": passwordController.text,

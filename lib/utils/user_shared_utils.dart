@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wisma_boe/Model/login_model/login_model.dart';
+
+import '../Model/login_model/login_model.dart';
 
 class UserSharedUtils {
   late final SharedPreferences _preferences;

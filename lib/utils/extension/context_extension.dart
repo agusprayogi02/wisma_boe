@@ -4,4 +4,26 @@ extension ContextExtension on BuildContext {
   void hideLoading() {
     if (Navigator.canPop(this)) Navigator.of(this).pop();
   }
+
+  void showLoading() {
+    showDialog(
+      context: this,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog.adaptive(
+        content: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator.adaptive(),
+              SizedBox(width: 12),
+              Text(
+                'Loading...',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
