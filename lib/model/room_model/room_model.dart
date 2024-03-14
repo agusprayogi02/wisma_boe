@@ -9,6 +9,7 @@ class RoomModel extends Equatable {
   final String? name;
   final int? capacity;
   final String? note;
+  final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -19,6 +20,7 @@ class RoomModel extends Equatable {
     this.name,
     this.capacity,
     this.note,
+    this.status,
     this.createdAt,
     this.updatedAt,
   });
@@ -26,18 +28,16 @@ class RoomModel extends Equatable {
   factory RoomModel.fromJson(Map<String, Object?> json) => RoomModel(
         id: json['id'] as String?,
         wismaId: json['wisma_id'] as String?,
-        wisma: json['wisma'] == null
-            ? null
-            : Wisma.fromJson(json['wisma']! as Map<String, Object?>),
+        wisma:
+            json['wisma'] == null ? null : Wisma.fromJson(json['wisma']! as Map<String, Object?>),
         name: json['name'] as String?,
         capacity: json['capacity'] as int?,
         note: json['note'] as String?,
-        createdAt: json['created_at'] == null
-            ? null
-            : DateTime.parse(json['created_at']! as String),
-        updatedAt: json['updated_at'] == null
-            ? null
-            : DateTime.parse(json['updated_at']! as String),
+        status: json['status'] as String?,
+        createdAt:
+            json['created_at'] == null ? null : DateTime.parse(json['created_at']! as String),
+        updatedAt:
+            json['updated_at'] == null ? null : DateTime.parse(json['updated_at']! as String),
       );
 
   Map<String, Object?> toJson() => {
@@ -47,6 +47,7 @@ class RoomModel extends Equatable {
         'name': name,
         'capacity': capacity,
         'note': note,
+        'status': status,
         'created_at': createdAt?.toIso8601String(),
         'updated_at': updatedAt?.toIso8601String(),
       };
@@ -58,6 +59,7 @@ class RoomModel extends Equatable {
     String? name,
     int? capacity,
     String? note,
+    String? status,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -68,6 +70,7 @@ class RoomModel extends Equatable {
       name: name ?? this.name,
       capacity: capacity ?? this.capacity,
       note: note ?? this.note,
+      status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -82,6 +85,7 @@ class RoomModel extends Equatable {
       name,
       capacity,
       note,
+      status,
       createdAt,
       updatedAt,
     ];
