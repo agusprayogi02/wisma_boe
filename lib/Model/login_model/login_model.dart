@@ -9,6 +9,7 @@ class LoginModel extends Equatable {
   final String? email;
   final String? name;
   final String? token;
+  final String? role;
   final List<Wisma>? wisma;
 
   const LoginModel({
@@ -16,6 +17,7 @@ class LoginModel extends Equatable {
     this.email,
     this.name,
     this.token,
+    this.role,
     this.wisma,
   });
 
@@ -24,6 +26,7 @@ class LoginModel extends Equatable {
         email: data['email'] as String?,
         name: data['name'] as String?,
         token: data['token'] as String?,
+        role: data['role'] as String?,
         wisma: (data['wisma'] as List<dynamic>?)
             ?.map((e) => Wisma.fromMap(e as Map<String, Object?>))
             .toList(),
@@ -34,6 +37,7 @@ class LoginModel extends Equatable {
         'email': email,
         'name': name,
         'token': token,
+        'role': role,
         'wisma': wisma?.map((e) => e.toMap()).toList(),
       };
 
@@ -54,6 +58,7 @@ class LoginModel extends Equatable {
     String? email,
     String? name,
     String? token,
+    String? role,
     List<Wisma>? wisma,
   }) {
     return LoginModel(
@@ -61,10 +66,11 @@ class LoginModel extends Equatable {
       email: email ?? this.email,
       name: name ?? this.name,
       token: token ?? this.token,
+      role: role ?? this.role,
       wisma: wisma ?? this.wisma,
     );
   }
 
   @override
-  List<Object?> get props => [id, email, name, token, wisma];
+  List<Object?> get props => [id, email, name, token, role, wisma];
 }

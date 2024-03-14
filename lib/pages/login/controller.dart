@@ -16,7 +16,7 @@ class LoginController {
       }).then((value) {
         context.hideLoading();
         userLocal.setUser(value.data['data']);
-        Navigator.pushReplacementNamed(context, HomePage.route);
+        Navigator.pushReplacementNamed(context, SplashPage.route);
       }).catchError((e) {
         context.hideLoading();
         showDialog(

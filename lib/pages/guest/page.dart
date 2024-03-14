@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/utils/home_notification_utils.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
+
+part 'controller.dart';
 
 class GuestPage extends StatefulWidget {
   const GuestPage({super.key});
+
+  static const String route = '/guest';
 
   @override
   State<GuestPage> createState() => _GuestPageState();
 }
 
 class _GuestPageState extends State<GuestPage> {
+  late final GuestController c;
+
+  @override
+  void initState() {
+    c = GuestController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +30,7 @@ class _GuestPageState extends State<GuestPage> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/logout");
+                c.logOut(context);
               },
               icon: const Icon(Icons.logout_outlined),
               alignment: AlignmentDirectional.centerEnd,
@@ -54,8 +67,7 @@ class _GuestPageState extends State<GuestPage> {
                   color: Colors.white,
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+                      topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                   boxShadow: List<BoxShadow>.generate(
                       3,
                       (index) => BoxShadow(
@@ -83,15 +95,12 @@ class _GuestPageState extends State<GuestPage> {
                       color: Color.fromARGB(255, 37, 197, 19),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)),
+                          bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
                     ),
                     child: const Text(
                       'Pindai',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                     )),
               ),
               const SizedBox(height: 20),
@@ -120,19 +129,15 @@ class _GuestPageState extends State<GuestPage> {
                     thickness: 5,
                     trackVisibility: false,
                     interactive: true,
-                    child: ListView(
-                        scrollDirection: Axis.vertical,
-                        children: const [
-                          HomeNotification('Pendaftaran Akun Berhasil'),
-                          SizedBox(height: 15),
-                          HomeNotification('Selamat Datang di Wisma BOE'),
-                          SizedBox(height: 15),
-                          HomeNotification(
-                              'Silahkan pindai QR Code sesuai kamar'),
-                          SizedBox(height: 15),
-                          HomeNotification(
-                              'Silahkan pindai QR Code sesuai kamar'),
-                        ]),
+                    child: ListView(scrollDirection: Axis.vertical, children: const [
+                      HomeNotification('Pendaftaran Akun Berhasil'),
+                      SizedBox(height: 15),
+                      HomeNotification('Selamat Datang di Wisma BOE'),
+                      SizedBox(height: 15),
+                      HomeNotification('Silahkan pindai QR Code sesuai kamar'),
+                      SizedBox(height: 15),
+                      HomeNotification('Silahkan pindai QR Code sesuai kamar'),
+                    ]),
                   )),
               const SizedBox(height: 20),
               const Text(

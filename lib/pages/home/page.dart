@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wisma_boe/Model/room_model/room_model.dart';
+import 'package:wisma_boe/pages/printer/page.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
+import 'package:wisma_boe/utils/network_utils.dart';
 import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 part 'controller.dart';
@@ -6,18 +10,18 @@ part 'controller.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  static const String route = '/home';
+  static const route = '/room';
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeController controller;
+  late final HomeController c;
 
   @override
   void initState() {
-    controller = HomeController();
+    c = HomeController();
     super.initState();
   }
 
@@ -25,48 +29,78 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wisma Boe'),
+        title: const Text('Ruangan'),
         actions: [
           IconButton(
             onPressed: () {
-              controller.logOut(context);
+              c.logOut(context);
             },
-            icon: const Icon(Icons.logout),
-            tooltip: "Keluar",
+            icon: const Icon(Icons.logout_rounded),
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/qr-scanner');
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            setState(() {});
+          },
+          child: FutureBuilder(
+            future: c.getRooms(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              }
+              if (snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text('Data masih kosong!'),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final item = snapshot.data![index];
+                  return ListTile(
+                    leading: IconButton(
+                      onPressed: () {},
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        foregroundColor: Colors.white,
+                      ),
+                      icon: const Icon(Icons.edit_rounded),
+                    ),
+                    title: Text(item.name ?? ''),
+                    subtitle: Text(item.wisma?.name ?? ''),
+                    trailing: IconButton(
+                      onPressed: () {
+                        c.goPrinter(context, item);
+                      },
+                      icon: const Icon(Icons.print_rounded),
+                    ),
+                  );
+                },
+              );
             },
-            child: const Text('QR Scanner'),
           ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/read-nfc');
-            },
-            child: const Text('Read NFC'),
-          ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/printer');
-            },
-            child: const Text('Printer'),
-          ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/room');
-            },
-            child: const Text('Room'),
-          ),
-        ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          c.addRoom(context).then((value) {
+            if (value) {
+              setState(() {});
+            }
+          });
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

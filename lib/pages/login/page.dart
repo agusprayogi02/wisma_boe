@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wisma_boe/pages/home/page.dart';
+import 'package:wisma_boe/pages/register/page.dart';
+import 'package:wisma_boe/pages/splash/page.dart';
 import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
 import 'package:wisma_boe/utils/user_shared_utils.dart';
@@ -54,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       labelText: 'Email',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -69,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                     controller: c.passwordController,
                     decoration: const InputDecoration(
                       labelText: 'Password',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -81,11 +80,25 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 45,
                     child: ElevatedButton(
                       onPressed: () => c.login(context),
                       child: const Text('Login'),
                     ),
+                  ),
+                  const SizedBox(height: 45),
+                  Row(
+                    children: [
+                      const Text(
+                        "Belum Punya akun?",
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, RegisterPage.route);
+                        },
+                        child: const Text('Daftar'),
+                      ),
+                    ],
                   ),
                 ],
               ),
