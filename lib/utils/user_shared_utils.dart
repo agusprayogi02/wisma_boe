@@ -21,9 +21,8 @@ class UserSharedUtils {
 
   bool check() => _preferences.containsKey(key);
 
-  Future<LoginModel?> getUser() async {
-    final shared = await SharedPreferences.getInstance();
-    return check() ? LoginModel.fromJson(shared.getString(key)!) : null;
+  LoginModel? getUser() {
+    return check() ? LoginModel.fromJson(_preferences.getString(key)!) : null;
   }
 
   Future<void> remove() async {

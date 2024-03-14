@@ -77,8 +77,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       icon: const Icon(Icons.edit_rounded),
                     ),
-                    title: Text(item.name ?? ''),
-                    subtitle: Text(item.wisma?.name ?? ''),
+                    title: Text('${item.name} - ${item.capacity} Orang'),
+                    subtitle: Text('Status : ${item.status}'),
                     trailing: IconButton(
                       onPressed: () {
                         c.goPrinter(context, item);
