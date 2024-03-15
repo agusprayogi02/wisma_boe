@@ -80,7 +80,6 @@ class _GuestPageState extends State<GuestPage> {
                           ? RoomInfoNull(
                               onTap: () async {
                                 await c.goScan();
-                                c.getCustomer();
                                 setState(() {});
                               },
                             )
