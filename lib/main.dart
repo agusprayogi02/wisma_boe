@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -37,8 +41,8 @@ class MyApp extends StatelessWidget {
             textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       routes: AppRouter.routes,
     );

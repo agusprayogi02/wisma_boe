@@ -31,7 +31,9 @@ class _PrinterPageState extends State<PrinterPage> {
         c.item = ModalRoute.of(context)!.settings.arguments as RoomModel;
       });
     });
-    c.printerManager.discovery(type: c.defaultPrinterType, isBle: c.isBle).listen((device) {
+    c.printerManager
+        .discovery(type: c.defaultPrinterType, isBle: c.isBle)
+        .listen((device) {
       c.devices.add(BluetoothPrinterModel(
         deviceName: device.name,
         address: device.address,
@@ -44,7 +46,8 @@ class _PrinterPageState extends State<PrinterPage> {
     });
 
     // subscription to listen change status of bluetooth connection
-    c.bluetoothSubscription = PrinterManager.instance.stateBluetooth.listen((status) {
+    c.bluetoothSubscription =
+        PrinterManager.instance.stateBluetooth.listen((status) {
       log(' ----------------- status bt $status ------------------ ');
       if (status == BTStatus.connected) {
         setState(() {
@@ -59,11 +62,13 @@ class _PrinterPageState extends State<PrinterPage> {
       if (status == BTStatus.connected && c.pendingTask != null) {
         if (Platform.isAndroid) {
           Future.delayed(const Duration(milliseconds: 1000), () {
-            PrinterManager.instance.send(type: PrinterType.bluetooth, bytes: c.pendingTask!);
+            PrinterManager.instance
+                .send(type: PrinterType.bluetooth, bytes: c.pendingTask!);
             c.pendingTask = null;
           });
         } else if (Platform.isIOS) {
-          PrinterManager.instance.send(type: PrinterType.bluetooth, bytes: c.pendingTask!);
+          PrinterManager.instance
+              .send(type: PrinterType.bluetooth, bytes: c.pendingTask!);
           c.pendingTask = null;
         }
       }
@@ -75,7 +80,8 @@ class _PrinterPageState extends State<PrinterPage> {
       if (Platform.isAndroid) {
         if (status == USBStatus.connected && c.pendingTask != null) {
           Future.delayed(const Duration(milliseconds: 1000), () {
-            PrinterManager.instance.send(type: PrinterType.usb, bytes: c.pendingTask!);
+            PrinterManager.instance
+                .send(type: PrinterType.usb, bytes: c.pendingTask!);
             c.pendingTask = null;
           });
         }
@@ -119,7 +125,8 @@ class _PrinterPageState extends State<PrinterPage> {
                                   c.connectDevice();
                                   setState(() {});
                                 },
-                          child: const Text("Connect", textAlign: TextAlign.center),
+                          child: const Text("Connect",
+                              textAlign: TextAlign.center),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -129,13 +136,14 @@ class _PrinterPageState extends State<PrinterPage> {
                               ? null
                               : () {
                                   if (c.selectedPrinter != null) {
-                                    c.printerManager
-                                        .disconnect(type: c.selectedPrinter!.typePrinter);
+                                    c.printerManager.disconnect(
+                                        type: c.selectedPrinter!.typePrinter);
                                   }
                                   c.isConnected = false;
                                   setState(() {});
                                 },
-                          child: const Text("Disconnect", textAlign: TextAlign.center),
+                          child: const Text("Disconnect",
+                              textAlign: TextAlign.center),
                         ),
                       ),
                     ],
@@ -181,9 +189,11 @@ class _PrinterPageState extends State<PrinterPage> {
                   },
                 ),
                 Visibility(
-                  visible: c.defaultPrinterType == PrinterType.bluetooth && Platform.isAndroid,
+                  visible: c.defaultPrinterType == PrinterType.bluetooth &&
+                      Platform.isAndroid,
                   child: SwitchListTile.adaptive(
-                    contentPadding: const EdgeInsets.only(bottom: 20.0, left: 20),
+                    contentPadding:
+                        const EdgeInsets.only(bottom: 20.0, left: 20),
                     title: const Text(
                       "This device supports ble (low energy)",
                       textAlign: TextAlign.start,
@@ -200,9 +210,11 @@ class _PrinterPageState extends State<PrinterPage> {
                   ),
                 ),
                 Visibility(
-                  visible: c.defaultPrinterType == PrinterType.bluetooth && Platform.isAndroid,
+                  visible: c.defaultPrinterType == PrinterType.bluetooth &&
+                      Platform.isAndroid,
                   child: SwitchListTile.adaptive(
-                    contentPadding: const EdgeInsets.only(bottom: 20.0, left: 20),
+                    contentPadding:
+                        const EdgeInsets.only(bottom: 20.0, left: 20),
                     title: const Text(
                       "reconnect",
                       textAlign: TextAlign.start,
@@ -221,22 +233,28 @@ class _PrinterPageState extends State<PrinterPage> {
                       .map(
                         (device) => ListTile(
                           title: Text('${device.deviceName}'),
-                          subtitle: Platform.isAndroid && c.defaultPrinterType == PrinterType.usb
+                          subtitle: Platform.isAndroid &&
+                                  c.defaultPrinterType == PrinterType.usb
                               ? null
                               : Visibility(
-                                  visible: !Platform.isWindows, child: Text("${device.address}")),
+                                  visible: !Platform.isWindows,
+                                  child: Text("${device.address}")),
                           onTap: () {
                             // do something
                             c.selectDevice(device);
                             setState(() {});
                           },
                           leading: c.selectedPrinter != null &&
-                                  ((device.typePrinter == PrinterType.usb && Platform.isWindows
-                                          ? device.deviceName == c.selectedPrinter!.deviceName
+                                  ((device.typePrinter == PrinterType.usb &&
+                                              Platform.isWindows
+                                          ? device.deviceName ==
+                                              c.selectedPrinter!.deviceName
                                           : device.vendorId != null &&
-                                              c.selectedPrinter!.vendorId == device.vendorId) ||
+                                              c.selectedPrinter!.vendorId ==
+                                                  device.vendorId) ||
                                       (device.address != null &&
-                                          c.selectedPrinter!.address == device.address))
+                                          c.selectedPrinter!.address ==
+                                              device.address))
                               ? const Icon(
                                   Icons.check,
                                   color: Colors.green,
@@ -244,14 +262,17 @@ class _PrinterPageState extends State<PrinterPage> {
                               : null,
                           trailing: OutlinedButton(
                             onPressed: c.selectedPrinter == null ||
-                                    device.deviceName != c.selectedPrinter?.deviceName
+                                    device.deviceName !=
+                                        c.selectedPrinter?.deviceName
                                 ? null
                                 : () async {
                                     c.printReceive();
                                   },
                             child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-                              child: Text("Print test ticket", textAlign: TextAlign.center),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 20),
+                              child: Text("Print test ticket",
+                                  textAlign: TextAlign.center),
                             ),
                           ),
                         ),
@@ -259,12 +280,14 @@ class _PrinterPageState extends State<PrinterPage> {
                       .toList(),
                 ),
                 Visibility(
-                  visible: c.defaultPrinterType == PrinterType.network && Platform.isWindows,
+                  visible: c.defaultPrinterType == PrinterType.network &&
+                      Platform.isWindows,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
                       controller: c.ipController,
-                      keyboardType: const TextInputType.numberWithOptions(signed: true),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(signed: true),
                       decoration: const InputDecoration(
                         label: Text("Ip Address"),
                         prefixIcon: Icon(Icons.wifi, size: 24),
@@ -276,12 +299,14 @@ class _PrinterPageState extends State<PrinterPage> {
                   ),
                 ),
                 Visibility(
-                  visible: c.defaultPrinterType == PrinterType.network && Platform.isWindows,
+                  visible: c.defaultPrinterType == PrinterType.network &&
+                      Platform.isWindows,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: TextFormField(
                       controller: c.portController,
-                      keyboardType: const TextInputType.numberWithOptions(signed: true),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(signed: true),
                       decoration: const InputDecoration(
                         label: Text("Port"),
                         prefixIcon: Icon(Icons.numbers_outlined, size: 24),
@@ -291,7 +316,8 @@ class _PrinterPageState extends State<PrinterPage> {
                   ),
                 ),
                 Visibility(
-                  visible: c.defaultPrinterType == PrinterType.network && Platform.isWindows,
+                  visible: c.defaultPrinterType == PrinterType.network &&
+                      Platform.isWindows,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: OutlinedButton(
@@ -302,8 +328,10 @@ class _PrinterPageState extends State<PrinterPage> {
                         c.printReceive();
                       },
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 50),
-                        child: Text("Print test ticket", textAlign: TextAlign.center),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 4, horizontal: 50),
+                        child: Text("Print test ticket",
+                            textAlign: TextAlign.center),
                       ),
                     ),
                   ),

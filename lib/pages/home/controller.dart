@@ -100,7 +100,9 @@ class HomeController {
     );
     if (rest is bool && rest) {
       showDialog(
-          context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
+          context: context,
+          builder: (context) =>
+              const Center(child: CircularProgressIndicator()));
       final user = (await local.getUser());
       _dio.options.headers['Authorization'] = 'Bearer ${user?.token}';
       _dio.post(

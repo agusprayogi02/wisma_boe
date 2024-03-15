@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
+import 'package:wisma_boe/utils/network_utils.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 import 'component/scanned_barcode_label.dart';
 import 'component/scanner_button_widgets.dart';
@@ -42,7 +45,7 @@ class _QrScannerPageState extends State<QrScannerPage> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Page'),
+        title: const Text('Qr Scanner'),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -66,45 +69,38 @@ class _QrScannerPageState extends State<QrScannerPage> {
               onDetect: (BarcodeCapture barcodes) {
                 c.scannerController.stop();
                 if (barcodes.barcodes.isNotEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Barcode found!'),
-                      content: SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.8,
-                        height: MediaQuery.sizeOf(context).height * 0.3,
-                        child: ListView.builder(
-                          itemCount: barcodes.barcodes.length,
-                          itemBuilder: (context, index) {
-                            final barcode = barcodes.barcodes[index];
-                            return ListTile(
-                              title: Text(
-                                  barcode.displayValue ?? 'No display value.'),
-                              subtitle: Text("Type: ${barcode.format.name}"),
-                              leading: barcodes.image != null
-                                  ? Image.memory(barcodes.image!)
-                                  : null,
-                            );
-                          },
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            c.scannerController.start();
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
+                  Navigator.of(context)
+                      .pop(barcodes.barcodes.first.displayValue ?? '');
+                  // showDialog(
+                  //   context: context,
+                  //   builder: (context) => AlertDialog(
+                  //     title: const Text('Barcode found!'),
+                  //     content: IntrinsicHeight(
+                  //       child: TextFormField(
+                  //         decoration: const InputDecoration(
+                  //           labelText: 'Ingin menginap berapa hari?',
+                  //           suffix: Text("Hari"),
+                  //         ),
+                  //         keyboardType: TextInputType.number,
+                  //         controller: c.countDayController,
+                  //       ),
+                  //     ),
+                  //     actions: [
+                  //       TextButton(
+                  //         onPressed: () {
+                  //           c.scan(context, barcodes.barcodes.first.displayValue ?? '');
+                  //           // c.scannerController.start();
+                  //         },
+                  //         child: const Text('OK'),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // );
                 } else {
-                  const snackbar = SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('No barcode found!'),
                     backgroundColor: Colors.red,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  ));
                 }
               },
             ),

@@ -28,8 +28,4 @@ class UserSharedUtils {
   Future<void> remove() async {
     await _preferences.remove(key);
   }
-
-  Future<void> clear() async {
-    await _preferences.clear();
-  }
 }
