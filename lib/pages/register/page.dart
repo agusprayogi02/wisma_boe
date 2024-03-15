@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/pages/login/page.dart';
 import 'package:wisma_boe/pages/splash/page.dart';
@@ -8,13 +9,15 @@ import 'package:wisma_boe/utils/user_shared_utils.dart';
 part 'controller.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   static const String route = '/register';
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
+
+String selectedGender = 'pria';
 
 class _RegisterPageState extends State<RegisterPage> {
   late final RegisterController c;
@@ -39,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: <Widget>[
                   Image.asset(
                     'assets/img/logo.png',
-                    height: 150,
+                    height: 100,
                   ),
                   const Text(
                     'Register',
@@ -138,6 +141,32 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'No.Telp tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  DropdownButtonFormField<String>(
+                    value: selectedGender,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedGender = newValue!;
+                        c.genderController.text = selectedGender;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Jenis Kelamin',
+                    ),
+                    items: <String>['pria', 'wanita']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Jenis kelamin harus dipilih';
                       }
                       return null;
                     },

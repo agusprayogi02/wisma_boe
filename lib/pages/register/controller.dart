@@ -10,6 +10,7 @@ class RegisterController {
   final namaController = TextEditingController();
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
+  final genderController = TextEditingController();
   final userLocal = UserSharedUtils.instance;
 
   void register(BuildContext context) async {
@@ -18,8 +19,8 @@ class RegisterController {
         showDialog(
           context: context,
           builder: (context) => const AlertDialog(
-            title: Text('Error'),
-            content: Text("Password and confirm password doesn't match."),
+            title: Text('Gagal'),
+            content: Text("Password dan konfirmasi password tidak sesuai"),
           ),
         );
         return;
@@ -37,21 +38,33 @@ class RegisterController {
             "name": namaController.text,
             "address": addressController.text,
             "phone": phoneController.text,
-            "gender": "wanita",
+            "gender": genderController.text,
           },
         );
         context.hideLoading();
         userLocal.setUser(response.data['data']);
         Navigator.pushReplacementNamed(context, SplashPage.route);
-      } catch (e) {
+      } on DioException catch (e) {
         context.hideLoading();
-        showDialog(
-          context: context,
-          builder: (context) => const AlertDialog(
-            title: Text('Error'),
-            content: Text("Registration failed. Please try again."),
-          ),
-        );
+        if (e.response?.statusCode == 422 ||
+            e.response?.statusCode == 500 ||
+            e.response?.statusCode == 404) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.response != null
+                  ? e.response!.data['message']
+                  : e.message ?? e.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.message ?? e.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       }
     }
   }
