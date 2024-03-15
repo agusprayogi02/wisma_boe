@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/pages/qr_scanner/page.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/home_notification_utils.dart';
+import 'package:wisma_boe/utils/network_utils.dart';
 import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 part 'controller.dart';
@@ -90,7 +93,7 @@ class _GuestPageState extends State<GuestPage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, QrScannerPage.route);
+                c.goScan();
               },
               child: Container(
                   height: 50,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/router/app_router.dart';
+import 'package:wisma_boe/utils/customer_shared_utils.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
 
 import 'utils/user_shared_utils.dart';
@@ -7,6 +8,7 @@ import 'utils/user_shared_utils.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSharedUtils.instance.init();
+  await CustomerSharedUtils.instance.init();
   runApp(const MyApp());
 }
 
