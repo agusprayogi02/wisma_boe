@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RoomInfoNull extends StatefulWidget {
-  const RoomInfoNull({super.key});
+class RoomInfoNull extends StatelessWidget {
+  const RoomInfoNull({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
-  @override
-  State<RoomInfoNull> createState() => _RoomInfoNullState();
-}
+  final VoidCallback? onTap;
 
-class _RoomInfoNullState extends State<RoomInfoNull> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,9 +45,7 @@ class _RoomInfoNullState extends State<RoomInfoNull> {
           ),
         ),
         InkWell(
-          onTap: () {
-            print("Pindai");
-          },
+          onTap: onTap,
           child: Container(
               height: 50,
               alignment: Alignment.center,
@@ -56,11 +54,15 @@ class _RoomInfoNullState extends State<RoomInfoNull> {
                 color: Color.fromARGB(255, 37, 197, 19),
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
               ),
               child: const Text(
                 'Pindai',
-                style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               )),
         ),
       ],

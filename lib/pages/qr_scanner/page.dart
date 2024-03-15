@@ -62,13 +62,15 @@ class _QrScannerPageState extends State<QrScannerPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: ScannedBarcodeLabel(barcodes: c.scannerController.barcodes),
+                  child: ScannedBarcodeLabel(
+                      barcodes: c.scannerController.barcodes),
                 ),
               ),
               onDetect: (BarcodeCapture barcodes) {
                 c.scannerController.stop();
                 if (barcodes.barcodes.isNotEmpty) {
-                  Navigator.of(context).pop(barcodes.barcodes.first.displayValue ?? '');
+                  Navigator.of(context)
+                      .pop(barcodes.barcodes.first.displayValue ?? '');
                   // showDialog(
                   //   context: context,
                   //   builder: (context) => AlertDialog(

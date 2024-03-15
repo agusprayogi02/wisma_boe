@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/router/app_router.dart';
-import 'package:wisma_boe/utils/customer_shared_utils.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
 
 import 'utils/user_shared_utils.dart';
@@ -8,7 +7,6 @@ import 'utils/user_shared_utils.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSharedUtils.instance.init();
-  await CustomerSharedUtils.instance.init();
   runApp(const MyApp());
 }
 
@@ -21,11 +19,10 @@ class MyApp extends StatelessWidget {
       title: 'Wisma Boe',
       navigatorKey: NetworkUtils.instance.alice.getNavigatorKey(),
       theme: ThemeData(
-        fontFamily: GoogleFonts.poppins().fontFamily,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue.shade300,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
-          titleTextStyle: const TextStyle(
+          titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -45,8 +42,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue.shade300)
-            .copyWith(background: Colors.grey[100]),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       routes: AppRouter.routes,
     );

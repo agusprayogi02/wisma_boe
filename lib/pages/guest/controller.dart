@@ -3,6 +3,7 @@ part of 'page.dart';
 class GuestController {
   final countDayController = TextEditingController(text: '1');
   final local = UserSharedUtils.instance;
+  final context = NetworkUtils.instance.navigatorKey.currentContext!;
   final dio = NetworkUtils.instance.dio;
 
   void logOut(BuildContext context) {
@@ -11,8 +12,19 @@ class GuestController {
     });
   }
 
+  Future<CustomerModel> getCustomer() async {
+    try {
+      dio.options.headers['Authorization'] = 'Bearer ${local.getUser()?.token}';
+      final rest = await dio.get("/customer/user");
+
+      final item = CustomerModel.fromMap(rest.data['data']);
+      return item;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> goScan() async {
-    final context = NetworkUtils.instance.navigatorKey.currentContext!;
     final rest = await Navigator.pushNamed(context, QrScannerPage.route);
     if (rest != null) {
       showDialog(
@@ -32,8 +44,8 @@ class GuestController {
           actions: [
             TextButton(
               onPressed: () {
+                context.hideLoading();
                 scan(rest as String);
-                // c.scannerController.start();
               },
               child: const Text('OK'),
             ),
@@ -44,10 +56,8 @@ class GuestController {
   }
 
   Future<void> scan(String code) async {
-    final context = NetworkUtils.instance.navigatorKey.currentContext!;
     int count = int.tryParse(countDayController.text) ?? 1;
     DateTime now = DateTime.now();
-    context.hideLoading();
     context.showLoading();
     dio.options.headers['Authorization'] = 'Bearer ${local.getUser()?.token}';
     try {
@@ -55,8 +65,8 @@ class GuestController {
         "check_out": now.add(Duration(days: count)).toIso8601String(),
         "room_id": code,
       });
-      context.hideLoading();
       if (rest.data['status'] == 'success') {
+        Navigator.of(context).pop(true);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(rest.data['message']),
@@ -64,6 +74,7 @@ class GuestController {
           ),
         );
       } else {
+        context.hideLoading();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(rest.data['message']),
