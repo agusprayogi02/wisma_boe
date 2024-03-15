@@ -34,6 +34,7 @@ class _GuestPageState extends State<GuestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: c.globalKey,
       appBar: AppBar(
         title: const Text('Wisma BOE'),
         actions: [
@@ -61,26 +62,22 @@ class _GuestPageState extends State<GuestPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Selamat Datang,',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: 5),
                     Text(
                       '${c.local.getUser()?.name}',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                     const SizedBox(height: 20),
                     Container(
                       child: item.roomId == null
                           ? RoomInfoNull(
-                              onTap: () async {
-                                await c.goScan();
-                                setState(() {});
+                              onTap: () {
+                                c.goScan().then((value) => setState(() {}));
                               },
                             )
                           : RoomInfoNotNull(

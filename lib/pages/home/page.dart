@@ -70,7 +70,14 @@ class _HomePageState extends State<HomePage> {
                   final item = snapshot.data![index];
                   return ListTile(
                     leading: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        c.idController.text = item.id.toString();
+                        c.addRoom(context).then((value) {
+                          if (value) {
+                            setState(() {});
+                          }
+                        });
+                      },
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.orange,
                         foregroundColor: Colors.white,

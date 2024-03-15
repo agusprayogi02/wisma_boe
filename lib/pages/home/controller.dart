@@ -4,6 +4,7 @@ class HomeController {
   final _dio = NetworkUtils.instance.dio;
   final local = UserSharedUtils.instance;
   final _nameController = TextEditingController();
+  final idController = TextEditingController();
   final _capacityController = TextEditingController();
   final _noteController = TextEditingController();
 
@@ -100,9 +101,7 @@ class HomeController {
     );
     if (rest is bool && rest) {
       showDialog(
-          context: context,
-          builder: (context) =>
-              const Center(child: CircularProgressIndicator()));
+          context: context, builder: (context) => const Center(child: CircularProgressIndicator()));
       final user = (await local.getUser());
       _dio.options.headers['Authorization'] = 'Bearer ${user?.token}';
       _dio.post(
@@ -117,6 +116,7 @@ class HomeController {
         _nameController.text = '';
         _capacityController.text = '';
         _noteController.text = '';
+        idController.text = '';
         context.hideLoading();
       }).catchError((e) {
         context.hideLoading();

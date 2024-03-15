@@ -3,7 +3,7 @@ part of 'page.dart';
 class GuestController {
   final countDayController = TextEditingController(text: '1');
   final local = UserSharedUtils.instance;
-  final context = NetworkUtils.instance.navigatorKey.currentContext!;
+  final globalKey = GlobalKey<State>();
   final dio = NetworkUtils.instance.dio;
 
   void logOut(BuildContext context) {
@@ -25,16 +25,16 @@ class GuestController {
   }
 
   Future<void> goScan() async {
+    final context = globalKey.currentContext!;
     final rest = await Navigator.pushNamed(context, QrScannerPage.route);
     if (rest != null) {
-      showDialog(
+      final response = await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Barcode found!'),
+          title: const Text('Ingin menginap berapa hari?'),
           content: IntrinsicHeight(
             child: TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Ingin menginap berapa hari?',
                 suffix: Text("Hari"),
               ),
               keyboardType: TextInputType.number,
@@ -42,20 +42,23 @@ class GuestController {
             ),
           ),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                context.hideLoading();
-                scan(rest as String);
+                Navigator.pop(context, true);
               },
               child: const Text('OK'),
             ),
           ],
         ),
       );
+      if (response != null && response) {
+        await scan(rest as String);
+      }
     }
   }
 
   Future<void> scan(String code) async {
+    final context = globalKey.currentContext!;
     int count = int.tryParse(countDayController.text) ?? 1;
     DateTime now = DateTime.now();
 
