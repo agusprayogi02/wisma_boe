@@ -5,12 +5,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:thermal_printer/esc_pos_utils_platform/esc_pos_utils_platform.dart';
 import 'package:thermal_printer/thermal_printer.dart';
+import 'package:wisma_boe/Model/room_model/room_model.dart';
 import 'package:wisma_boe/pages/printer/model/bluetooth_printer_model.dart';
 
 part 'controller.dart';
 
 class PrinterPage extends StatefulWidget {
   const PrinterPage({super.key});
+
+  static const String route = '/printer';
 
   @override
   State<PrinterPage> createState() => _PrinterPageState();
@@ -23,6 +26,11 @@ class _PrinterPageState extends State<PrinterPage> {
   void initState() {
     c = PrinterController();
     super.initState();
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        c.item = ModalRoute.of(context)!.settings.arguments as RoomModel;
+      });
+    });
     c.printerManager.discovery(type: c.defaultPrinterType, isBle: c.isBle).listen((device) {
       c.devices.add(BluetoothPrinterModel(
         deviceName: device.name,
@@ -239,7 +247,7 @@ class _PrinterPageState extends State<PrinterPage> {
                                     device.deviceName != c.selectedPrinter?.deviceName
                                 ? null
                                 : () async {
-                                    c.printReceiveTest();
+                                    c.printReceive();
                                   },
                             child: const Padding(
                               padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
@@ -291,7 +299,7 @@ class _PrinterPageState extends State<PrinterPage> {
                         if (c.ipController.text.isNotEmpty) {
                           c.setIpAddress(c.ipController.text);
                         }
-                        c.printReceiveTest();
+                        c.printReceive();
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 4, horizontal: 50),

@@ -7,6 +7,7 @@ class PrinterController {
   var isConnected = false;
   var printerManager = PrinterManager.instance;
   var devices = <BluetoothPrinterModel>[];
+  late final RoomModel item;
 
   List<int>? pendingTask;
   var ipAddress = '';
@@ -29,7 +30,6 @@ class PrinterController {
         typePrinter: defaultPrinterType,
       ));
     });
-    // setState(() {});
   }
 
   void setPort(String value) {
@@ -68,19 +68,17 @@ class PrinterController {
     selectedPrinter = device;
   }
 
-  Future printReceiveTest() async {
+  Future printReceive() async {
     List<int> bytes = [];
+    final profile = await CapabilityProfile.load();
 
-    // Xprinter XP-N160I
-    final profile = await CapabilityProfile.load(name: 'XP-N160I');
-
-    // PaperSize.mm80 or PaperSize.mm58
-    final generator = Generator(PaperSize.mm58, profile);
+    final generator = Generator(PaperSize.mm80, profile);
     bytes += generator.setGlobalCodeTable('CP1252');
-    bytes += generator.text('Code Kamar Wisma Bima Hall',
+    bytes += generator.text('Kamar ${item.wisma?.name}',
         styles: const PosStyles(align: PosAlign.center));
-    bytes +=
-        generator.qrcode("BH-103", size: QRSize.Size8, cor: QRCorrection.H, align: PosAlign.center);
+    bytes += generator.text('No. Kamar: ${item.name}');
+    bytes += generator.qrcode(item.id ?? '0',
+        size: QRSize.Size8, cor: QRCorrection.H, align: PosAlign.center);
     _printEscPos(bytes, generator);
   }
 
@@ -169,7 +167,5 @@ class PrinterController {
         break;
       default:
     }
-
-    // setState(() {});
   }
 }

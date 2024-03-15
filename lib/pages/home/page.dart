@@ -1,88 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hex/hex.dart';
-import 'package:nfc_manager/nfc_manager.dart';
+import 'package:wisma_boe/Model/room_model/room_model.dart';
+import 'package:wisma_boe/pages/printer/page.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
+import 'package:wisma_boe/utils/network_utils.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
 
 part 'controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  static const route = '/room';
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeController controller;
+  late final HomeController c;
 
   @override
   void initState() {
-    controller = HomeController();
+    c = HomeController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: FutureBuilder<bool>(
-          future: NfcManager.instance.isAvailable(),
-          builder: (context, ss) => ss.data != true
-              ? Center(child: Text('NfcManager.isAvailable(): ${ss.data}'))
-              : Flex(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  direction: Axis.vertical,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        margin: const EdgeInsets.all(4),
-                        constraints: const BoxConstraints.expand(),
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: SingleChildScrollView(
-                          child: ValueListenableBuilder<dynamic>(
-                            valueListenable: controller.result,
-                            builder: (context, value, _) => Text('${value ?? ''}'),
-                          ),
-                        ),
+      appBar: AppBar(
+        title: const Text('Ruangan'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              c.logOut(context);
+            },
+            icon: const Icon(Icons.logout_rounded),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            setState(() {});
+          },
+          child: FutureBuilder(
+            future: c.getRooms(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              }
+              if (snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text('Data masih kosong!'),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final item = snapshot.data![index];
+                  return ListTile(
+                    leading: IconButton(
+                      onPressed: () {},
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        foregroundColor: Colors.white,
                       ),
+                      icon: const Icon(Icons.edit_rounded),
                     ),
-                    Flexible(
-                      flex: 3,
-                      child: GridView.count(
-                        padding: const EdgeInsets.all(4),
-                        crossAxisCount: 2,
-                        childAspectRatio: 4,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        children: [
-                          ElevatedButton(
-                            onPressed: controller.tagRead,
-                            child: const Text('Tag Read'),
-                          ),
-                          ElevatedButton(
-                            onPressed: controller.ndefWrite,
-                            child: const Text('Ndef Write'),
-                          ),
-                          ElevatedButton(
-                            onPressed: controller.ndefWriteLock,
-                            child: const Text('Ndef Write Lock'),
-                          ),
-                        ],
-                      ),
+                    title: Text('${item.name} - ${item.capacity} Orang'),
+                    subtitle: Text('Status : ${item.status}'),
+                    trailing: IconButton(
+                      onPressed: () {
+                        c.goPrinter(context, item);
+                      },
+                      icon: const Icon(Icons.print_rounded),
                     ),
-                  ],
-                ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(12),
-        child: ElevatedButton(
-          style:
-              ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
-          onPressed: () => controller.goPrinterPage(context),
-          child: const Text('Thermal Bluetooth'),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          c.addRoom(context).then((value) {
+            if (value) {
+              setState(() {});
+            }
+          });
+        },
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }

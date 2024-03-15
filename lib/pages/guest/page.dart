@@ -1,19 +1,32 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/pages/guest/notification.dart';
-import 'package:wisma_boe/pages/guest/room_info_not_null.dart';
-import 'package:wisma_boe/pages/guest/room_info_null.dart';
+import 'package:wisma_boe/pages/qr_scanner/page.dart';
+import 'package:wisma_boe/utils/extension/context_extension.dart';
+import 'package:wisma_boe/utils/home_notification_utils.dart';
+import 'package:wisma_boe/utils/network_utils.dart';
+import 'package:wisma_boe/utils/user_shared_utils.dart';
+
+part 'controller.dart';
 
 class GuestPage extends StatefulWidget {
-  const GuestPage({super.key, required this.guestName, this.isNullroomInfo = false});
+  const GuestPage({super.key});
 
-  final String guestName;
-  final bool isNullroomInfo;
+  static const String route = '/guest';
 
   @override
   State<GuestPage> createState() => _GuestPageState();
 }
 
 class _GuestPageState extends State<GuestPage> {
+  late final GuestController c;
+
+  @override
+  void initState() {
+    c = GuestController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +35,7 @@ class _GuestPageState extends State<GuestPage> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/logout");
+                c.logOut(context);
               },
               icon: const Icon(Icons.logout_outlined),
               alignment: AlignmentDirectional.centerEnd,
@@ -42,8 +55,10 @@ class _GuestPageState extends State<GuestPage> {
               ),
               const SizedBox(height: 5),
               Text(
-                widget.guestName, //Dinamis
-                style: const TextStyle(fontSize: 20),
+                '${c.local.getUser()?.name}',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 20),
               Container(
@@ -91,26 +106,6 @@ class _GuestPageState extends State<GuestPage> {
                       HomeNotification('Silahkan pindai QR Code sesuai kamar'),
                     ]),
                   )),
-              const SizedBox(height: 20),
-              const Text(
-                'Atur Jadwal Kegiatan',
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 5),
-              Container(
-                height: 150,
-                decoration: BoxDecoration(
-                  boxShadow: List<BoxShadow>.generate(
-                      3,
-                      (index) => BoxShadow(
-                          color: Colors.grey.shade200,
-                          blurRadius: 4,
-                          spreadRadius: 1,
-                          offset: const Offset(0, 0))),
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-              )
             ],
           ),
         ));
