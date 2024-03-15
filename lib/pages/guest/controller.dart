@@ -58,11 +58,13 @@ class GuestController {
   Future<void> scan(String code) async {
     int count = int.tryParse(countDayController.text) ?? 1;
     DateTime now = DateTime.now();
+
+    final formatDate = DateFormat('yyyy-MM-dd');
     context.showLoading();
     dio.options.headers['Authorization'] = 'Bearer ${local.getUser()?.token}';
     try {
       final rest = await dio.post("/customer/scan", data: {
-        "check_out": now.add(Duration(days: count)).toIso8601String(),
+        "check_out": formatDate.format(now.add(Duration(days: count))),
         "room_id": code,
       });
       if (rest.data['status'] == 'success') {
