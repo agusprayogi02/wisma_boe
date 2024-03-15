@@ -28,7 +28,8 @@ class _SplashPageState extends State<SplashPage> {
   checkSession() async {
     if (local.check()) {
       bool isAdmin = (await local.getUser())!.role == "admin";
-      Navigator.pushReplacementNamed(context, isAdmin ? HomePage.route : GuestPage.route);
+      Navigator.pushReplacementNamed(
+          context, isAdmin ? HomePage.route : GuestPage.route);
     } else {
       Navigator.pushReplacementNamed(context, LoginPage.route);
     }

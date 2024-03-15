@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 import 'wisma.dart';
 
-class RoomModel extends Equatable {
+class Room extends Equatable {
   final String? id;
   final String? wismaId;
   final Wisma? wisma;
@@ -13,7 +15,7 @@ class RoomModel extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  const RoomModel({
+  const Room({
     this.id,
     this.wismaId,
     this.wisma,
@@ -25,28 +27,28 @@ class RoomModel extends Equatable {
     this.updatedAt,
   });
 
-  factory RoomModel.fromJson(Map<String, Object?> json) => RoomModel(
-        id: json['id'] as String?,
-        wismaId: json['wisma_id'] as String?,
-        wisma: json['wisma'] == null
+  factory Room.fromMap(Map<String, Object?> data) => Room(
+        id: data['id'] as String?,
+        wismaId: data['wisma_id'] as String?,
+        wisma: data['wisma'] == null
             ? null
-            : Wisma.fromJson(json['wisma']! as Map<String, Object?>),
-        name: json['name'] as String?,
-        capacity: json['capacity'] as int?,
-        note: json['note'] as String?,
-        status: json['status'] as String?,
-        createdAt: json['created_at'] == null
+            : Wisma.fromMap(data['wisma']! as Map<String, Object?>),
+        name: data['name'] as String?,
+        capacity: data['capacity'] as int?,
+        note: data['note'] as String?,
+        status: data['status'] as String?,
+        createdAt: data['created_at'] == null
             ? null
-            : DateTime.parse(json['created_at']! as String),
-        updatedAt: json['updated_at'] == null
+            : DateTime.parse(data['created_at']! as String),
+        updatedAt: data['updated_at'] == null
             ? null
-            : DateTime.parse(json['updated_at']! as String),
+            : DateTime.parse(data['updated_at']! as String),
       );
 
-  Map<String, Object?> toJson() => {
+  Map<String, Object?> toMap() => {
         'id': id,
         'wisma_id': wismaId,
-        'wisma': wisma?.toJson(),
+        'wisma': wisma?.toMap(),
         'name': name,
         'capacity': capacity,
         'note': note,
@@ -55,7 +57,19 @@ class RoomModel extends Equatable {
         'updated_at': updatedAt?.toIso8601String(),
       };
 
-  RoomModel copyWith({
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Room].
+  factory Room.fromJson(String data) {
+    return Room.fromMap(json.decode(data) as Map<String, Object?>);
+  }
+
+  /// `dart:convert`
+  ///
+  /// Converts [Room] to a JSON string.
+  String toJson() => json.encode(toMap());
+
+  Room copyWith({
     String? id,
     String? wismaId,
     Wisma? wisma,
@@ -66,7 +80,7 @@ class RoomModel extends Equatable {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return RoomModel(
+    return Room(
       id: id ?? this.id,
       wismaId: wismaId ?? this.wismaId,
       wisma: wisma ?? this.wisma,

@@ -1,11 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'dart:convert';
 
-import 'user.dart';
+import 'package:equatable/equatable.dart';
 
 class Wisma extends Equatable {
   final String? id;
   final String? userId;
-  final User? user;
+  final dynamic user;
   final String? name;
   final String? address;
   final String? code;
@@ -25,28 +25,26 @@ class Wisma extends Equatable {
     this.updatedAt,
   });
 
-  factory Wisma.fromJson(Map<String, Object?> json) => Wisma(
-        id: json['id'] as String?,
-        userId: json['user_id'] as String?,
-        user: json['user'] == null
+  factory Wisma.fromMap(Map<String, Object?> data) => Wisma(
+        id: data['id'] as String?,
+        userId: data['user_id'] as String?,
+        user: data['user'] as dynamic,
+        name: data['name'] as String?,
+        address: data['address'] as String?,
+        code: data['code'] as String?,
+        note: data['note'] as String?,
+        createdAt: data['created_at'] == null
             ? null
-            : User.fromJson(json['user']! as Map<String, Object?>),
-        name: json['name'] as String?,
-        address: json['address'] as String?,
-        code: json['code'] as String?,
-        note: json['note'] as String?,
-        createdAt: json['created_at'] == null
+            : DateTime.parse(data['created_at']! as String),
+        updatedAt: data['updated_at'] == null
             ? null
-            : DateTime.parse(json['created_at']! as String),
-        updatedAt: json['updated_at'] == null
-            ? null
-            : DateTime.parse(json['updated_at']! as String),
+            : DateTime.parse(data['updated_at']! as String),
       );
 
-  Map<String, Object?> toJson() => {
+  Map<String, Object?> toMap() => {
         'id': id,
         'user_id': userId,
-        'user': user?.toJson(),
+        'user': user,
         'name': name,
         'address': address,
         'code': code,
@@ -55,10 +53,22 @@ class Wisma extends Equatable {
         'updated_at': updatedAt?.toIso8601String(),
       };
 
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Wisma].
+  factory Wisma.fromJson(String data) {
+    return Wisma.fromMap(json.decode(data) as Map<String, Object?>);
+  }
+
+  /// `dart:convert`
+  ///
+  /// Converts [Wisma] to a JSON string.
+  String toJson() => json.encode(toMap());
+
   Wisma copyWith({
     String? id,
     String? userId,
-    User? user,
+    dynamic user,
     String? name,
     String? address,
     String? code,
