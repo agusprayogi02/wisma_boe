@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:wisma_boe/pages/login/page.dart';
 import 'package:wisma_boe/pages/splash/page.dart';
 import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
@@ -53,6 +52,32 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    controller: c.nikController,
+                    decoration: const InputDecoration(
+                      labelText: 'NIK',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'NIK tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: c.namaController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nama',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Nama tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
                     controller: c.emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -89,32 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Password tidak boleh kosong';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    controller: c.nikController,
-                    decoration: const InputDecoration(
-                      labelText: 'NIK',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'NIK tidak boleh kosong';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    controller: c.namaController,
-                    decoration: const InputDecoration(
-                      labelText: 'Nama',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Nama tidak boleh kosong';
                       }
                       return null;
                     },
@@ -188,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, LoginPage.route);
+                          context.hideLoading();
                         },
                         child: const Text('Login'),
                       ),
