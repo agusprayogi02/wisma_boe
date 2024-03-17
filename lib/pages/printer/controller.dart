@@ -102,7 +102,8 @@ class PrinterController {
         pendingTask = null;
         break;
       case PrinterType.bluetooth:
-        bytes += generator.cut();
+        bytes += generator.feed(2);
+        // bytes += generator.cut();
         await printerManager.connect(
             type: bluetoothPrinter.typePrinter,
             model: BluetoothPrinterInput(

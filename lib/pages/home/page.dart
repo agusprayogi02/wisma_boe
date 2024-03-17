@@ -56,7 +56,16 @@ class _HomePageState extends State<HomePage> {
               }
               if (snapshot.hasError) {
                 return Center(
-                  child: Text('Error: ${snapshot.error}'),
+                  child: Column(
+                    children: [
+                      Text('Error: ${snapshot.error}'),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {});
+                          },
+                          child: const Text('Coba Lagi'))
+                    ],
+                  ),
                 );
               }
               if (snapshot.data!.isEmpty) {
