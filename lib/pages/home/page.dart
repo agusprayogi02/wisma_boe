@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/Model/room_model/room_model.dart';
 import 'package:wisma_boe/pages/printer/page.dart';
@@ -70,13 +71,11 @@ class _HomePageState extends State<HomePage> {
                   final item = snapshot.data![index];
                   return ListTile(
                     leading: IconButton(
-                      onPressed: () {
-                        c.idController.text = item.id.toString();
-                        c.addRoom(context).then((value) {
-                          if (value) {
-                            setState(() {});
-                          }
-                        });
+                      onPressed: () async {
+                        final rest = await c.showForm(context, item: item);
+                        if (rest) {
+                          setState(() {});
+                        }
                       },
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.orange,
@@ -100,12 +99,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          c.addRoom(context).then((value) {
-            if (value) {
-              setState(() {});
-            }
-          });
+        onPressed: () async {
+          final rest = await c.showForm(context);
+          if (rest) {
+            setState(() {});
+          }
         },
         child: const Icon(Icons.add_rounded),
       ),

@@ -72,7 +72,7 @@ class PrinterController {
     List<int> bytes = [];
     final profile = await CapabilityProfile.load();
 
-    final generator = Generator(PaperSize.mm58, profile);
+    final generator = Generator(PaperSize.mm80, profile);
     bytes += generator.setGlobalCodeTable('CP1252');
     bytes += generator.text('Kamar ${item.wisma?.name}',
         styles: const PosStyles(align: PosAlign.center));
