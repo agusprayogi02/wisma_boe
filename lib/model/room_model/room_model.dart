@@ -12,6 +12,7 @@ class RoomModel extends Equatable {
   final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final DateTime? updated;
 
   const RoomModel({
     this.id,
@@ -23,24 +24,22 @@ class RoomModel extends Equatable {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.updated,
   });
 
   factory RoomModel.fromJson(Map<String, Object?> json) => RoomModel(
         id: json['id'] as String?,
         wismaId: json['wisma_id'] as String?,
-        wisma: json['wisma'] == null
-            ? null
-            : Wisma.fromJson(json['wisma']! as Map<String, Object?>),
+        wisma:
+            json['wisma'] == null ? null : Wisma.fromJson(json['wisma']! as Map<String, Object?>),
         name: json['name'] as String?,
         capacity: json['capacity'] as int?,
         note: json['note'] as String?,
         status: json['status'] as String?,
-        createdAt: json['created_at'] == null
-            ? null
-            : DateTime.parse(json['created_at']! as String),
-        updatedAt: json['updated_at'] == null
-            ? null
-            : DateTime.parse(json['updated_at']! as String),
+        createdAt:
+            json['created_at'] == null ? null : DateTime.parse(json['created_at']! as String),
+        updatedAt:
+            json['updated_at'] == null ? null : DateTime.parse(json['updated_at']! as String),
       );
 
   Map<String, Object?> toJson() => {

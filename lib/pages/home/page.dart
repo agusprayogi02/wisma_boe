@@ -78,27 +78,56 @@ class _HomePageState extends State<HomePage> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final item = snapshot.data![index];
-                  return ListTile(
-                    leading: IconButton(
-                      onPressed: () async {
-                        final rest = await c.showForm(context, item: item);
-                        if (rest) {
-                          setState(() {});
-                        }
-                      },
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        foregroundColor: Colors.white,
+                  return Dismissible(
+                    key: UniqueKey(),
+                    onDismissed: (direction) async {
+                      final rest = await c.deleteRoom(item.id ?? '');
+                      if (rest) {
+                        setState(() {});
+                      }
+                    },
+                    confirmDismiss: (direction) async {
+                      bool delete = false;
+                      final snackbarController = ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Yakin Ingin Hapus kamar ${item.name} ini?'),
+                          action: SnackBarAction(label: 'Hapus', onPressed: () => delete = true),
+                        ),
+                      );
+                      await snackbarController.closed;
+                      return delete;
+                    },
+                    background: Container(
+                      color: Colors.red,
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 16),
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
                       ),
-                      icon: const Icon(Icons.edit_rounded),
                     ),
-                    title: Text('${item.name} - ${item.capacity} Orang'),
-                    subtitle: Text('Status : ${item.status}'),
-                    trailing: IconButton(
-                      onPressed: () {
-                        c.goPrinter(context, item);
-                      },
-                      icon: const Icon(Icons.print_rounded),
+                    child: ListTile(
+                      leading: IconButton(
+                        onPressed: () async {
+                          final rest = await c.showForm(context, item: item);
+                          if (rest) {
+                            setState(() {});
+                          }
+                        },
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          foregroundColor: Colors.white,
+                        ),
+                        icon: const Icon(Icons.edit_rounded),
+                      ),
+                      title: Text('${item.name} - ${item.capacity} Orang'),
+                      subtitle: Text('Status : ${item.status}'),
+                      trailing: IconButton(
+                        onPressed: () {
+                          c.goPrinter(context, item);
+                        },
+                        icon: const Icon(Icons.print_rounded),
+                      ),
                     ),
                   );
                 },

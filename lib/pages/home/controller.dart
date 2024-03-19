@@ -33,6 +33,15 @@ class HomeController {
     }
   }
 
+  Future<bool> deleteRoom(String id) async {
+    try {
+      await _dio.delete('room/$id');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   void goPrinter(BuildContext context, RoomModel item) {
     Navigator.pushNamed(context, PrinterPage.route, arguments: item);
   }
