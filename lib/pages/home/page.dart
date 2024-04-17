@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wisma_boe/Model/room_model/room_model.dart';
-import 'package:wisma_boe/pages/printer/page.dart';
 import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/network_utils.dart';
 import 'package:wisma_boe/utils/user_shared_utils.dart';
+
+import '../new_printer/page.dart';
 
 part 'controller.dart';
 
@@ -88,10 +89,13 @@ class _HomePageState extends State<HomePage> {
                     },
                     confirmDismiss: (direction) async {
                       bool delete = false;
-                      final snackbarController = ScaffoldMessenger.of(context).showSnackBar(
+                      final snackbarController =
+                          ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Yakin Ingin Hapus kamar ${item.name} ini?'),
-                          action: SnackBarAction(label: 'Hapus', onPressed: () => delete = true),
+                          content:
+                              Text('Yakin Ingin Hapus kamar ${item.name} ini?'),
+                          action: SnackBarAction(
+                              label: 'Hapus', onPressed: () => delete = true),
                         ),
                       );
                       await snackbarController.closed;

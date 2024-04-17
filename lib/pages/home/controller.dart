@@ -43,7 +43,7 @@ class HomeController {
   }
 
   void goPrinter(BuildContext context, RoomModel item) {
-    Navigator.pushNamed(context, PrinterPage.route, arguments: item);
+    Navigator.pushNamed(context, NewPrinterPage.route, arguments: item);
   }
 
   Future<bool> showForm(BuildContext context, {RoomModel? item}) async {
@@ -71,7 +71,8 @@ class HomeController {
                     labelText: 'Kapasitas',
                   ),
                   keyboardType: TextInputType.number,
-                  controller: _capacityController..text = "${item?.capacity ?? 0}",
+                  controller: _capacityController
+                    ..text = "${item?.capacity ?? 0}",
                 ),
                 const SizedBox(height: 10),
                 TextField(
@@ -151,8 +152,9 @@ class HomeController {
             e.response?.statusCode == 404) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                  e.response != null ? e.response!.data['message'] : e.message ?? e.toString()),
+              content: Text(e.response != null
+                  ? e.response!.data['message']
+                  : e.message ?? e.toString()),
               backgroundColor: Colors.red,
             ),
           );
