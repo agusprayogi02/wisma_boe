@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "boe.wisma" "\0"
-            VALUE "FileDescription", "wisma_boe" "\0"
+            VALUE "CompanyName", "id.nexteam" "\0"
+            VALUE "FileDescription", "next_starter" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "wisma_boe" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 boe.wisma. All rights reserved." "\0"
-            VALUE "OriginalFilename", "wisma_boe.exe" "\0"
-            VALUE "ProductName", "wisma_boe" "\0"
+            VALUE "InternalName", "next_starter" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 id.nexteam. All rights reserved." "\0"
+            VALUE "OriginalFilename", "next_starter.exe" "\0"
+            VALUE "ProductName", "next_starter" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

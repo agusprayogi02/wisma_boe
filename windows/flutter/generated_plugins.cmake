@@ -3,11 +3,12 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus
   file_selector_windows
+  flutter_secure_storage_windows
+  geolocator_windows
   permission_handler_windows
-  share_plus
-  thermal_printer
-  url_launcher_windows
+  smart_auth
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

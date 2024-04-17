@@ -5,21 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "wisma_boe",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "wisma_boe (profile mode)",
+            "name": "DEV",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main_dev.dart",
+            "flutterMode": "debug",
         },
         {
-            "name": "wisma_boe (release mode)",
+            "name": "PRD",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main_prod.dart",
             "flutterMode": "release"
-        }
+            // "args": [
+            // 	"--flavor",
+            // 	"prod"
+            // ]
+        },
     ]
 }
