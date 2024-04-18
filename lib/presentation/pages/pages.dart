@@ -1,6 +1,10 @@
 export 'app_page.dart';
 export 'auth/auth.dart';
 export 'form/form_page.dart';
+export 'home/guest/page.dart';
+export 'home/head/page.dart';
 export 'home/home_page.dart';
+export 'home/keeper/page.dart';
 export 'post/post_page.dart';
+export 'qr_scanner/page.dart';
 export 'splash_page.dart';

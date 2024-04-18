@@ -1,12 +1,11 @@
 part of 'theme.dart';
 
 class AppCoreColor {
-  static const AppCoreColorType primary = AppCoreColorType.primary;
+  static AppCoreColorType primary = AppCoreColorType.primary;
   static const AppCoreColorType secondary = AppCoreColorType.secondary;
   static const AppCoreColorType success = AppCoreColorType.success;
   static const AppCoreColorType error = AppCoreColorType.error;
   static const AppCoreColorType info = AppCoreColorType.info;
-  static const AppCoreColorNeutral neutral = AppCoreColorNeutral.main;
 }
 
 class AppCoreColorType {
@@ -26,13 +25,13 @@ class AppCoreColorType {
     required this.focus,
   });
 
-  static const AppCoreColorType primary = AppCoreColorType(
-    main: Color(0xFFC1272D),
-    surface: Color.fromRGBO(193, 39, 45, 0.08),
-    border: Color(0xFFEAB7B9),
-    hover: Color(0xFFA12025),
-    pressed: Color(0xFF601316),
-    focus: Color.fromRGBO(193, 39, 45, 0.2),
+  static AppCoreColorType primary = AppCoreColorType(
+    main: AppCoreTheme.primaryColor,
+    surface: const Color(0x132992e3),
+    border: AppCoreTheme.primarySwatch.shade100,
+    hover: AppCoreTheme.primarySwatch.shade700,
+    pressed: AppCoreTheme.primarySwatch.shade800,
+    focus: AppCoreTheme.primarySwatch.shade900.withOpacity(33),
   );
 
   static const AppCoreColorType secondary = AppCoreColorType(
@@ -69,44 +68,5 @@ class AppCoreColorType {
     hover: Color(0xFF207FD4),
     pressed: Color(0xFF134C80),
     focus: Color.fromRGBO(39, 152, 255, 0.2),
-  );
-}
-
-class AppCoreColorNeutral {
-  final Color n10;
-  final Color n20;
-  final Color n30;
-  final Color n40;
-  final Color n50;
-  final Color n60;
-  final Color n70;
-  final Color n80;
-  final Color n90;
-  final Color n100;
-
-  const AppCoreColorNeutral({
-    required this.n10,
-    required this.n20,
-    required this.n30,
-    required this.n40,
-    required this.n50,
-    required this.n60,
-    required this.n70,
-    required this.n80,
-    required this.n90,
-    required this.n100,
-  });
-
-  static const AppCoreColorNeutral main = AppCoreColorNeutral(
-    n10: Color(0xFFFFFFFF),
-    n20: Color(0xFFF5F5F5),
-    n30: Color(0xFFEDEDED),
-    n40: Color(0xFFD6D6D6),
-    n50: Color(0xFFC2C2C2),
-    n60: Color(0xFF878787),
-    n70: Color(0xFF606060),
-    n80: Color(0xFF383838),
-    n90: Color(0xFF403A3A),
-    n100: Color(0xFF101010),
   );
 }

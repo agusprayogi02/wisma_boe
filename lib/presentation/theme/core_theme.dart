@@ -1,38 +1,38 @@
 part of 'theme.dart';
 
 class AppCoreTheme {
-  static const int primaryColorValue = 0xFFC1272D;
+  static const int primaryColorValue = 0xFF2992e3;
   static const primaryColor = Color(primaryColorValue);
+  Color s = const Color(0xFFECBEC0);
   static const MaterialColor primarySwatch = MaterialColor(
     primaryColorValue,
     <int, Color>{
-      50: Color(0xFFF8E5E6),
-      100: Color(0xFFECBEC0),
-      200: Color(0xFFE09396),
-      300: Color(0xFFD4686C),
-      400: Color(0xFFCA474D),
+      50: Color(0xFFe3f1fb),
+      100: Color(0xFFbbddf6),
+      200: Color(0xFF90c8f0),
+      300: Color(0xFF66b2ea),
+      400: Color(0xFF47a2e7),
       500: Color(primaryColorValue),
-      600: Color(0xFFBB2328),
-      700: Color(0xFFB31D22),
-      800: Color(0xFFAB171C),
-      900: Color(0xFF9E0E11),
+      600: Color(0xFF2385d6),
+      700: Color(0xFF1b73c3),
+      800: Color(0xFF1463b1),
+      900: Color(0xFF074692),
     },
   );
 
-  static const int accentColorValue = 0xFFFF9A9B;
+  static const int accentColorValue = 0xFFfaee9f;
   static const accentColor = Color(accentColorValue);
   static const MaterialColor accentSwatch = MaterialColor(
     accentColorValue,
     <int, Color>{
-      100: Color(0xFFFFCDCE),
+      100: Color(0xFFfcf5c5),
       200: Color(accentColorValue),
-      400: Color(0xFFFF6769),
-      700: Color(0xFFFF4D50),
+      400: Color(0xFFf6e35f),
+      700: Color(0xFFefb63c),
     },
   );
 
-  static SystemUiOverlayStyle systemUiOverlayStyle =
-      SystemUiOverlayStyle.light.copyWith(
+  static SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle.light.copyWith(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     systemStatusBarContrastEnforced: true,
@@ -49,7 +49,7 @@ class AppCoreTheme {
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: primaryColor,
     ),
-    textTheme: GoogleFonts.robotoTextTheme(),
+    textTheme: GoogleFonts.poppinsTextTheme(),
     // AppBar Theme
     appBarTheme: AppBarTheme(
       elevation: 10.0,
@@ -163,17 +163,17 @@ class AppCoreTheme {
         ),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
-      errorBorder: const OutlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.red,
+          color: AppCoreColor.error.main,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      focusedErrorBorder: const OutlineInputBorder(
+      focusedErrorBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.red,
+          color: AppCoreColor.error.main,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       constraints: const BoxConstraints(
         minHeight: 55,
@@ -206,16 +206,15 @@ class AppCoreTheme {
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
-      unselectedLabelColor: AppCoreColor.neutral.n60,
+      unselectedLabelColor: ColorTheme.neutral.shade600,
       unselectedLabelStyle: TextStyle(
-        color: AppCoreColor.neutral.n60,
+        color: ColorTheme.neutral.shade600,
         fontSize: 14,
       ),
       dividerColor: Colors.transparent,
       indicatorColor: primaryColor,
       indicatorSize: TabBarIndicatorSize.label,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
           return AppCoreColor.primary.focus;
         }
@@ -234,8 +233,7 @@ class AppCoreTheme {
     // CheckBox Button Theme
     checkboxTheme: CheckboxThemeData(
       splashRadius: 5.0,
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }
@@ -245,8 +243,7 @@ class AppCoreTheme {
     ),
     // Radio Button Theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }

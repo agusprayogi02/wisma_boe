@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:next_starter/presentation/router/routes/home_route.dart';
 
 import '../pages/pages.dart';
 import 'routes/auth_route.dart';
@@ -17,6 +18,7 @@ class AppRouter {
         ),
         ...AuthRoute.routes,
         ...GeneralRoute.routes,
+        ...HomeRoute.routes,
       ],
     );
   }
