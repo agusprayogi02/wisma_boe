@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:next_starter/presentation/components/components.dart';
+import 'package:next_starter/presentation/pages/pages.dart';
 
 import '../../../components/app_bar_wisma.dart';
 import '../../../components/home_report.dart';
@@ -15,9 +18,9 @@ class HomeKeeperPage extends StatefulWidget {
 class _HomeKeeperPageState extends State<HomeKeeperPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarWisma(
-        namePage: "Wisma VEDC",
+    return BaseScaffold(
+      appBar: const BaseAppBar(
+        title: 'Wisma BOE',
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -115,7 +118,7 @@ class _HomeKeeperPageState extends State<HomeKeeperPage> {
                 //     return const CheckBottomSheet();
                 //   },
                 // );
-                Navigator.pushReplacementNamed(context, '/keeper/scan');
+                context.go(ScanPage.path);
               },
               child: Container(
                   height: 50,

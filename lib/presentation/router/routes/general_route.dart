@@ -24,5 +24,7 @@ class GeneralRoute {
       name: QrScannerPage.path,
       builder: (context, state) => const PostPage(),
     ),
+    GoRoute(
+        path: ScanPage.path, name: ScanPage.path, builder: (context, state) => const ScanPage()),
   ];
 }

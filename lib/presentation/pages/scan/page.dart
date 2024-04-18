@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../components/app_bar_wisma.dart';
 
@@ -8,6 +7,7 @@ part 'controller.dart';
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
 
+  static const String path = '/scan';
   @override
   State<ScanPage> createState() => _ScanPageState();
 }
