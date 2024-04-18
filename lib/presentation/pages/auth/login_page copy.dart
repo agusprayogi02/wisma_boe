@@ -13,8 +13,8 @@ import '../../theme/theme.dart';
 import '../home/home_page.dart';
 import 'auth.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, this.isAddAccount = false});
+class LoginPageCopy extends StatefulWidget {
+  const LoginPageCopy({super.key, this.isAddAccount = false});
 
   final bool isAddAccount;
 
@@ -41,7 +41,6 @@ class _LoginPageState extends State<LoginPage> {
       child: ReactiveFormBuilder(
         form: () => form,
         builder: (context, form, child) => BaseScaffold(
-          appBar: const BaseAppBar(),
           bottomNavigationBar: Container(
             height: kBottomNavigationBarHeight * 2.5,
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
@@ -106,18 +105,25 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Padding(
+                  padding: EdgeInsets.only(
+                    top: kBottomNavigationBarHeight,
+                    bottom: 20,
+                  ),
+                  child: BaseLogo(isSmall: true),
+                ),
                 Text(
-                  'Daftar',
+                  'Selamat datang di Nexteam',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: CustomTextTheme.heading4.copyWith(
+                  style: CustomTextTheme.paragraph3.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Wisma BOE',
-                  style: AppStyles.text36PxBold.copyWith(
-                    color: ColorTheme.primary,
+                  'Harap masukkan email dan password dengan benar',
+                  style: AppStyles.text14Px.copyWith(
+                    color: ColorTheme.neutral[600],
                   ),
                 ),
                 50.verticalSpace,

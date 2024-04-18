@@ -4,7 +4,7 @@ import '../../../common/extensions/context_extension.dart';
 import '../../theme/theme.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final String? title;
   final List<Widget>? actions;
   final bool isBack;
   final bool automaticallyImplyLeading;
@@ -12,7 +12,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const BaseAppBar({
     super.key,
-    required this.title,
+    this.title,
     this.actions,
     this.isBack = false,
     this.automaticallyImplyLeading = true,
@@ -23,9 +23,9 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        title,
+        title ?? "",
         style: AppStyles.text16PxBold.copyWith(
-          color: Colors.black,
+          color: Colors.white,
         ),
       ),
       leading: isBack
@@ -35,13 +35,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
               },
               child: const Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: Colors.black,
+                color: Colors.white,
                 size: 24,
               ),
             )
           : null,
       centerTitle: centerTitle,
-      backgroundColor: ColorTheme.white,
+      backgroundColor: ColorTheme.primary,
       elevation: 0,
       automaticallyImplyLeading: automaticallyImplyLeading,
       actions: actions,

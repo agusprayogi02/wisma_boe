@@ -1,7 +1,7 @@
 part of 'theme.dart';
 
 class AppCoreTheme {
-  static const int primaryColorValue = 0xFF2992e3;
+  static const int primaryColorValue = 0xFF66b2ea;
   static const primaryColor = Color(primaryColorValue);
   Color s = const Color(0xFFECBEC0);
   static const MaterialColor primarySwatch = MaterialColor(
@@ -10,9 +10,9 @@ class AppCoreTheme {
       50: Color(0xFFe3f1fb),
       100: Color(0xFFbbddf6),
       200: Color(0xFF90c8f0),
-      300: Color(0xFF66b2ea),
+      300: Color(primaryColorValue),
       400: Color(0xFF47a2e7),
-      500: Color(primaryColorValue),
+      500: Color(0xFF2992e3),
       600: Color(0xFF2385d6),
       700: Color(0xFF1b73c3),
       800: Color(0xFF1463b1),

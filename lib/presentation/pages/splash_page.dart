@@ -39,11 +39,8 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: 12.rounded,
-          border: Border.all(
-            color: ColorTheme.primary,
-          ),
+        decoration: const BoxDecoration(
+          color: ColorTheme.primary,
         ),
         child: const BaseLogo(),
       ),

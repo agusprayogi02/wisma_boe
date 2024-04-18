@@ -13,7 +13,7 @@ void main() {
     name: 'PREVIEW',
     properties: {
       Keys.apiUrl: 'https://wisma.nexteam.id/api/',
-      // Keys.apiKey: 'jksdhfkjhs83rjkh324kj23h4',
+      Keys.apiKey: 'jksdhfkjhs83rjkh324kj23h4',
       Configs.customKey: 'value',
     },
   );
