@@ -75,6 +75,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_screenutil: ^5.9.0
   mobile_scanner: ^4.0.1
+  fl_chart: ^0.67.0
   # lecle_downloads_path_provider: ^0.0.2+8
 
   # Local Database
