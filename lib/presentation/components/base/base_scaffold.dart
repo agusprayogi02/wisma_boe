@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:next_starter/presentation/theme/theme.dart';
 
 import '../../../common/extensions/extensions.dart';
 
@@ -25,11 +26,11 @@ class BaseScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorTheme.scaffoldBackground,
       appBar: appBar,
       body: SafeArea(
         child: Padding(
-          padding: padding ?? 24.all,
+          padding: padding ?? 20.all,
           child: body,
         ),
       ),

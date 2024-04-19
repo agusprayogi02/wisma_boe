@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (widget.isAddAccount) {
                               context.route.pop();
                             } else {
-                              context.read<AuthCubit>().login(formG.value);
+                              //context.read<AuthCubit>().login(formG.value);
                               context.route.go(HomeKeeperPage.path);
                             }
                           },
