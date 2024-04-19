@@ -49,10 +49,9 @@ class _LoginPageState extends State<LoginPage> {
                 if (state is AuthLoading) {
                   context.showLoadingIndicator();
                 } else if (state is AuthError) {
-                  context.showSnackbar(title: "Error", message: state.message, error: true);
+                  context.showSnackbar(message: state.message, error: true, isPop: true);
                 } else if (state is AuthSuccess) {
-                  context.hideLoading();
-                  context.showSnackbar(title: "Sukses", message: state.message);
+                  context.showSnackbar(message: state.message);
                   context.route.pushReplacement(HomeKeeperPage.path);
                 }
               },
@@ -67,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                             if (widget.isAddAccount) {
                               context.route.pop();
                             } else {
-                              //context.read<AuthCubit>().login(formG.value);
-                              context.route.go(HomeKeeperPage.path);
+                              context.read<AuthCubit>().login(formG.value);
+                              // context.route.go(HomeKeeperPage.path);
                             }
                           },
                           title: "Masuk",

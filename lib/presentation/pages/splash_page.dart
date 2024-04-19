@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:next_starter/presentation/pages/pages.dart';
 
 import '../../common/extensions/extensions.dart';
 import '../../data/datasources/session/session_source.dart';
 import '../../injection.dart';
 import '../components/components.dart';
 import '../theme/theme.dart';
-import 'auth/auth.dart';
-import 'home/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -28,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
     await 3.delayedSeconds;
     final user = await locator<SessionSource>().hasSession;
     if (user) {
-      context.route.replace(HomePage.path);
+      context.route.replace(HomeGuestPage.path);
       return;
     }
     context.route.replace(LoginPage.path);

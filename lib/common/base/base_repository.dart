@@ -43,7 +43,7 @@ class BaseRepository {
           database: (message) => AppError.serverError(message: message, code: 200),
           connectionTimeOut: () => const AppError.timeOut(),
           badCertificate: () => const AppError.badCertificate(),
-          badResponse: () => const AppError.badResponse(),
+          badResponse: (message) => AppError.badResponse(message: message),
         ));
       }
     } else {

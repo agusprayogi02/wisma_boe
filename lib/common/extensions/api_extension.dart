@@ -22,6 +22,12 @@ extension ApiExceptionDioX on DioException {
           return ApiException.unAuthorized(
             response != null ? ApiUtils.parseResponseMessage(response!) : 'Unauthorized',
           );
+        } else if (code == 403) {
+          return ApiException.serverException(
+            message: response != null
+                ? ApiUtils.parseResponseMessage(response!)
+                : 'Error tidak diketahui',
+          );
         } else if (code == 400) {
           return ApiException.serverException(
             message: response != null
@@ -46,7 +52,9 @@ extension ApiExceptionDioX on DioException {
       case DioExceptionType.badCertificate:
         return const ApiException.badCertificate();
       case DioExceptionType.badResponse:
-        return const ApiException.badResponse();
+        return ApiException.badResponse(
+          response != null ? ApiUtils.parseResponseMessage(response!) : 'Respon tidak valid!',
+        );
       case DioExceptionType.unknown:
         if (response == null) {
           return const ApiException.serverException(
