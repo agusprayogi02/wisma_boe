@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:next_starter/common/enums/role_enum.dart';
 import 'package:next_starter/presentation/pages/pages.dart';
 
 import '../../common/extensions/extensions.dart';
@@ -25,12 +26,23 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> init() async {
     await 3.delayedSeconds;
-    final user = await locator<SessionSource>().hasSession;
-    if (user) {
-      context.route.replace(HomeGuestPage.path);
-      return;
+    final has = await locator<SessionSource>().hasSession;
+    final user = await locator<SessionSource>().user;
+    if (has) {
+      if (user != null) {
+        if (user.roles?.first == RoleEnum.keeper.name) {
+          context.go(HomeKeeperPage.path);
+          return;
+        } else if (user.roles?.first == RoleEnum.guest.name) {
+          context.go(HomeGuestPage.path);
+          return;
+        } else if (user.roles?.first == RoleEnum.head.name) {
+          context.go(HomeHeadPage.path);
+          return;
+        }
+      }
     }
-    context.route.replace(LoginPage.path);
+    context.go(LoginPage.path);
   }
 
   @override

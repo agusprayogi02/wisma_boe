@@ -27,7 +27,10 @@ class AuthRepository extends BaseRepository {
         password: json['password'].toString().trim(),
       ),
       onSuccess: (r) => r,
-      onSaveToLocal: (data) => session.setToken(data.accessToken ?? ''),
+      onSaveToLocal: (data) async {
+        await session.setToken(data.accessToken ?? '');
+        await session.setUser(data);
+      },
     );
   }
 

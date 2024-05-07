@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:next_starter/common/extensions/extensions.dart';
+import 'package:next_starter/common/utils/date_utils.dart';
 
 part 'report_box.dart';
 
@@ -30,10 +33,11 @@ class HomeReport extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("Laporan 24 Maret 2023", style: Theme.of(context).textTheme.titleLarge),
+            Text("Laporan ${DateCommonUtils.formatDate(DateTime.now())}",
+                style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
-        const SizedBox(height: 10),
+        18.verticalSpace,
         Column(
           children: [
             Row(
@@ -42,25 +46,27 @@ class HomeReport extends StatelessWidget {
                 ReportBox(
                   title: title1,
                   value: value1,
-                ),
+                ).expand(),
+                12.horizontalSpace,
                 ReportBox(
                   title: title2,
                   value: value2,
-                ),
+                ).expand(),
               ],
             ),
-            const SizedBox(height: 8),
+            12.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ReportBox(
                   title: title3,
                   value: value3,
-                ),
+                ).expand(),
+                12.horizontalSpace,
                 ReportBox(
                   title: title4,
                   value: value4,
-                ),
+                ).expand(),
               ],
             ),
           ],

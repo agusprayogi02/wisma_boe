@@ -14,7 +14,6 @@ class _ReportBoxState extends State<ReportBox> {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      width: 160,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

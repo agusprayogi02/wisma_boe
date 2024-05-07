@@ -54,19 +54,13 @@ class AppCoreTheme {
     appBarTheme: AppBarTheme(
       elevation: 10.0,
       toolbarHeight: kToolbarHeight + 10,
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
+      backgroundColor: AppCoreTheme.primaryColor,
+      foregroundColor: ColorTheme.white,
+      surfaceTintColor: ColorTheme.white,
       systemOverlayStyle: systemUiOverlayStyle,
-      iconTheme: const IconThemeData(
-        color: primaryColor,
-      ),
-      actionsIconTheme: const IconThemeData(
-        color: primaryColor,
-      ),
       titleTextStyle: TextStyle(
         fontSize: 18,
-        color: const Color(0xFF101010),
+        color: ColorTheme.white,
         fontWeight: FontWeight.w600,
         fontFamily: GoogleFonts.roboto().fontFamily,
       ),

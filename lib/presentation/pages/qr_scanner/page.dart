@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:next_starter/common/permission/permission.dart';
+import 'package:next_starter/injection.dart';
 
 import 'component/scanned_barcode_label.dart';
 import 'component/scanner_button_widgets.dart';
@@ -24,6 +26,7 @@ class _QrScannerPageState extends State<QrScannerPage> {
   @override
   void initState() {
     super.initState();
+    locator<PermissionInterface>().camera();
     scannerController.start();
   }
 

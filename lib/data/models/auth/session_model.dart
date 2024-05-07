@@ -3,16 +3,14 @@ import 'package:equatable/equatable.dart';
 class SessionModel extends Equatable {
   final int? id;
   final String? name;
-  final String? username;
-  final String? phone;
+  final List<String>? roles;
   final String? email;
   final String? accessToken;
 
   const SessionModel({
     this.id,
     this.name,
-    this.username,
-    this.phone,
+    this.roles,
     this.email,
     this.accessToken,
   });
@@ -20,16 +18,14 @@ class SessionModel extends Equatable {
   SessionModel copyWith({
     int? id,
     String? name,
-    String? username,
-    String? phone,
+    List<String>? roles,
     String? email,
     String? accessToken,
   }) {
     return SessionModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      username: username ?? this.username,
-      phone: phone ?? this.phone,
+      roles: roles ?? this.roles,
       email: email ?? this.email,
       accessToken: accessToken ?? this.accessToken,
     );
@@ -39,8 +35,7 @@ class SessionModel extends Equatable {
     return {
       'id': id,
       'name': name,
-      'username': username,
-      'phone': phone,
+      'roles': roles,
       'email': email,
       'access_token': accessToken,
     };
@@ -50,8 +45,7 @@ class SessionModel extends Equatable {
     return SessionModel(
       id: map['id']?.toInt(),
       name: map['name'],
-      username: map['username'],
-      phone: map['phone'],
+      roles: List<String>.from(map['roles']),
       email: map['email'],
       accessToken: map['access_token'],
     );
@@ -62,8 +56,7 @@ class SessionModel extends Equatable {
     return [
       id,
       name,
-      username,
-      phone,
+      roles,
       email,
       accessToken,
     ];
