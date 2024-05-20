@@ -27,8 +27,8 @@ class _SplashPageState extends State<SplashPage> {
     await 3.delayedSeconds;
     final user = await locator<SessionSource>().hasSession;
     if (user) {
-      context.route.replace(HomeGuestPage.path);
-      return;
+      //context.route.replace(HomeGuestPage.path);
+      //return;
     }
     context.route.replace(LoginPage.path);
   }
