@@ -24,7 +24,7 @@ class AnalyzeImageFromGalleryButton extends StatelessWidget {
           return;
         }
 
-        final bool barcodes = await controller.analyzeImage(
+        final BarcodeCapture? barcodes = await controller.analyzeImage(
           image.path,
         );
 
@@ -32,7 +32,7 @@ class AnalyzeImageFromGalleryButton extends StatelessWidget {
           return;
         }
 
-        final SnackBar snackbar = barcodes
+        final SnackBar snackbar = (barcodes?.barcodes ?? []).isNotEmpty
             ? const SnackBar(
                 content: Text('Barcode found!'),
                 backgroundColor: Colors.green,
@@ -58,7 +58,7 @@ class StartStopMobileScannerButton extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: ValueNotifier(controller),
       builder: (context, state, child) {
-        if (!state.isStarting) {
+        if (!state.autoStart) {
           return IconButton(
             color: Colors.white,
             icon: const Icon(Icons.play_arrow),
@@ -90,14 +90,24 @@ class SwitchCameraButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: controller.cameraFacingState,
+      valueListenable: controller,
       builder: (context, state, child) {
-        final Widget icon;
+        if (!state.isInitialized || !state.isRunning) {
+          return const SizedBox.shrink();
+        }
 
-        switch (state.index) {
-          case 0:
+        final int? availableCameras = state.availableCameras;
+
+        if (availableCameras != null && availableCameras < 2) {
+          return const SizedBox.shrink();
+        }
+
+        late final Widget icon;
+
+        switch (state.cameraDirection) {
+          case CameraFacing.front:
             icon = const Icon(Icons.camera_front);
-          default:
+          case CameraFacing.back:
             icon = const Icon(Icons.camera_rear);
         }
 
@@ -121,9 +131,22 @@ class ToggleFlashlightButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: controller.torchState,
+      valueListenable: controller,
       builder: (context, state, child) {
-        switch (state) {
+        if (!state.isInitialized || !state.isRunning) {
+          return const SizedBox.shrink();
+        }
+
+        switch (state.torchState) {
+          case TorchState.auto:
+            return IconButton(
+              color: Colors.white,
+              iconSize: 32.0,
+              icon: const Icon(Icons.flash_auto),
+              onPressed: () async {
+                await controller.toggleTorch();
+              },
+            );
           case TorchState.off:
             return IconButton(
               color: Colors.white,
@@ -142,7 +165,7 @@ class ToggleFlashlightButton extends StatelessWidget {
                 await controller.toggleTorch();
               },
             );
-          default:
+          case TorchState.unavailable:
             return const Icon(
               Icons.no_flash,
               color: Colors.grey,

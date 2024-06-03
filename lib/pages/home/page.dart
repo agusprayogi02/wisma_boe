@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:wisma_boe/Model/room_model/room_model.dart';
+import 'package:wisma_boe/model/room_model/room_model.dart';
 import 'package:wisma_boe/pages/printer/page.dart';
 import 'package:wisma_boe/utils/extension/context_extension.dart';
 import 'package:wisma_boe/utils/network_utils.dart';

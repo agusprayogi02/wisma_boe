@@ -14,7 +14,7 @@ class UserSharedUtils {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> setUser(dynamic value) async {
+  Future<void> setUser(Map<String, Object?> value) async {
     final model = LoginModel.fromMap(value);
     await _preferences.setString(key, model.toJson());
   }

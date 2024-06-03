@@ -58,13 +58,15 @@ class _QrScannerPageState extends State<QrScannerPage> {
               errorBuilder: (context, error, child) {
                 return ScannerErrorWidget(error: error);
               },
-              overlay: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ScannedBarcodeLabel(barcodes: c.scannerController.barcodes),
-                ),
-              ),
+              overlayBuilder: (context, constraints) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ScannedBarcodeLabel(barcodes: c.scannerController.barcodes),
+                  ),
+                );
+              },
               onDetect: (BarcodeCapture barcodes) {
                 c.scannerController.stop();
                 if (barcodes.barcodes.isNotEmpty) {
@@ -79,9 +81,9 @@ class _QrScannerPageState extends State<QrScannerPage> {
             ),
           ),
           ValueListenableBuilder(
-            valueListenable: ValueNotifier(c.scannerController),
+            valueListenable: c.scannerController,
             builder: (context, value, child) {
-              if (!value.isStarting) {
+              if (!value.isInitialized || !value.isRunning || value.error != null) {
                 return const SizedBox();
               }
 

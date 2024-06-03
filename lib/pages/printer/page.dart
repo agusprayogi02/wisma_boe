@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:thermal_printer/esc_pos_utils_platform/esc_pos_utils_platform.dart';
 import 'package:thermal_printer/thermal_printer.dart';
-import 'package:wisma_boe/Model/room_model/room_model.dart';
+import 'package:wisma_boe/model/room_model/room_model.dart';
 import 'package:wisma_boe/pages/printer/model/bluetooth_printer_model.dart';
 
 part 'controller.dart';
