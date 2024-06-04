@@ -58,7 +58,7 @@ class _QrScannerPageState extends State<QrScannerPage> {
               errorBuilder: (context, error, child) {
                 return ScannerErrorWidget(error: error);
               },
-              overlay: Padding(
+              overlayBuilder: (context, constraints) => Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -79,9 +79,9 @@ class _QrScannerPageState extends State<QrScannerPage> {
             ),
           ),
           ValueListenableBuilder(
-            valueListenable: ValueNotifier(scannerController),
+            valueListenable: scannerController,
             builder: (context, value, child) {
-              if (!value.isStarting) {
+              if (!value.isRunning) {
                 return const SizedBox();
               }
 

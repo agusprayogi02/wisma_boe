@@ -1,7 +1,7 @@
+import 'package:chuck_interceptor/chuck.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_alice/alice.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -32,7 +32,7 @@ class ApiServiceImpl extends ApiService {}
 // locator.registerLazySingleton<PermissionInterface>(() => const KendaliPermission());
 Future<void> initializeDependencies(GlobalKey<NavigatorState> navigatorKey) async {
   final apiService = ApiServiceImpl();
-  final alice = Alice(showNotification: true, navigatorKey: navigatorKey);
+  final alice = Chuck(showNotification: true, navigatorKey: navigatorKey);
 
   locator.registerLazySingleton<AppRouter>(() => AppRouter());
   locator.registerLazySingleton<Dio>(
