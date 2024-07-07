@@ -28,8 +28,8 @@ class AuthRepository extends BaseRepository {
       ),
       onSuccess: (r) => r,
       onSaveToLocal: (data) async {
-        await session.setToken(data.accessToken ?? '');
-        await session.setUser(data);
+        session.setToken(data.accessToken ?? '');
+        session.setUser(data);
       },
     );
   }
@@ -80,7 +80,10 @@ class AuthRepository extends BaseRepository {
 
   EitherResponse<void> logout() async {
     return handleNetworkCall(
-      call: session.deleteToken(),
+      call: Future.value(() async {
+        session.deleteToken();
+        return false;
+      }),
       onSuccess: (r) => r,
     );
   }

@@ -13,26 +13,26 @@ class SessionSource {
     required this.shared,
   });
 
-  Future<String?> get token async {
-    return await shared.get(_key);
+  String? get token {
+    return shared.get(_key);
   }
 
-  Future<void> setToken(String token) async {
-    await shared.store(_key, token);
+  void setToken(String token) {
+    shared.store(_key, token);
   }
 
-  Future<SessionModel?> get user async {
-    final u = await shared.get(_userKey);
+  SessionModel? get user {
+    final u = shared.get(_userKey);
     return u == null ? null : SessionModel.fromMap(jsonDecode(u));
   }
 
-  Future<void> setUser(SessionModel user) async {
-    await shared.store(_key, jsonEncode(user.toMap()));
+  void setUser(SessionModel user) {
+    shared.store(_key, jsonEncode(user.toMap()));
   }
 
-  Future<void> deleteToken() async {
-    await shared.remove(_key);
+  void deleteToken() {
+    shared.remove(_key);
   }
 
-  Future<bool> get hasSession async => await shared.hasData(_key);
+  bool get hasSession => shared.hasData(_key);
 }

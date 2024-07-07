@@ -1,4 +1,4 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:native_storage/native_storage.dart';
 
 abstract class SharedPrefStorageInterface {
   final Map<String, String> collections;
@@ -7,55 +7,36 @@ abstract class SharedPrefStorageInterface {
     this.collections = const <String, String>{},
   });
 
-  Future<bool> hasData(String key);
-  Future<String?> get(String key);
-  Future<void> store(String key, String value);
-  Future<void> remove(String key);
-  Future<void> refresh();
-  Future<void> reset();
+  bool hasData(String key);
+  String? get(String key);
+  void store(String key, String value);
+  void remove(String key);
+  void reset();
 }
 
 class SharedPreferenceStorage extends SharedPrefStorageInterface {
-  late final FlutterSecureStorage storage;
+  late final NativeSecureStorage storage;
 
   SharedPreferenceStorage()
       : super(
           collections: <String, String>{},
         ) {
-    storage = const FlutterSecureStorage(
-      aOptions: AndroidOptions(
-        encryptedSharedPreferences: true,
-      ),
-      iOptions: IOSOptions(
-        accessibility: KeychainAccessibility.first_unlock,
-      ),
-    );
+    storage = NativeStorage().secure;
   }
 
   @override
-  Future<String?> get(String key) async {
+  String? get(String key) {
     try {
-      return storage.read(key: key);
+      return storage.read(key);
     } catch (e) {
       return collections[key];
     }
   }
 
   @override
-  Future<void> refresh() async {
+  void remove(String key) {
     try {
-      final values = await storage.readAll();
-      collections.clear();
-      collections.addAll(values);
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<void> remove(String key) async {
-    try {
-      await storage.delete(key: key);
+      storage.delete(key);
       collections.remove(key);
     } catch (error) {
       rethrow;
@@ -63,9 +44,9 @@ class SharedPreferenceStorage extends SharedPrefStorageInterface {
   }
 
   @override
-  Future<void> reset() async {
+  void reset() {
     try {
-      await storage.deleteAll();
+      storage.clear();
       collections.clear();
     } catch (error) {
       rethrow;
@@ -73,20 +54,19 @@ class SharedPreferenceStorage extends SharedPrefStorageInterface {
   }
 
   @override
-  Future<void> store(String key, String value) async {
+  void store(String key, String value) {
     try {
-      await storage.write(key: key, value: value);
+      storage.write(key, value);
       collections[key] = value;
-      await refresh();
     } catch (error) {
       rethrow;
     }
   }
 
   @override
-  Future<bool> hasData(String key) async {
+  bool hasData(String key) {
     try {
-      return storage.containsKey(key: key);
+      return storage.read(key) != null;
     } catch (e) {
       return collections.containsKey(key);
     }

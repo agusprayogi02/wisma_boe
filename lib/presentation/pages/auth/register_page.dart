@@ -93,12 +93,11 @@ class RegisterView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
-                  bottom: 20,
+              Text(
+                'Wisma BOE',
+                style: AppStyles.text36PxBold.copyWith(
+                  color: ColorTheme.primary,
                 ),
-                child: BaseLogo(),
               ),
               Text(
                 'Silahkan daftar akun baru',
@@ -175,7 +174,8 @@ class RegisterView extends StatelessWidget {
                       ),
                       // recognizer: TapGestureRecognizer()
                       // ..onTap = () => context.route.push(OtpRoute(email: "Aaab".toString())),
-                      recognizer: TapGestureRecognizer()..onTap = () => context.route.pop(),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => context.route.goNamed(LoginPage.path),
                     ),
                   ],
                 ),

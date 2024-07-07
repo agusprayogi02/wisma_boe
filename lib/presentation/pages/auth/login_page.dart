@@ -37,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
     return ReactiveFormBuilder(
       form: () => form,
       builder: (context, form, child) => BaseScaffold(
-        appBar: const BaseAppBar(),
         bottomNavigationBar: Container(
           height: kBottomNavigationBarHeight * 2.5,
           padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                 context.showSnackbar(message: state.message, error: true, isPop: true);
               } else if (state is AuthSuccess) {
                 context.showSnackbar(message: state.message);
-                context.route.pushReplacement(HomeKeeperPage.path);
+                context.route.pushReplacement(SplashPage.path);
               }
             },
             builder: (context, state) {
@@ -102,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Daftar',
+                'Masuk',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: CustomTextTheme.heading4.copyWith(

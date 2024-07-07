@@ -98,3 +98,5 @@ Follow these simple steps to use this template.
 - [Website](https://www.nexteam.id)
 - [GitHub](https://github.com/Nexteam-Indonesia)
 - [Instagram](https://www.instagram.com/nexteam.indonesia)
+
+@recommended:languages 

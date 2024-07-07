@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:next_starter/common/enums/role_enum.dart';
+import 'package:next_starter/common/logging/logger.dart';
 import 'package:next_starter/presentation/pages/pages.dart';
 
 import '../../common/extensions/extensions.dart';
@@ -28,6 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     await 3.delayedSeconds;
     final has = await locator<SessionSource>().hasSession;
     final user = await locator<SessionSource>().user;
+    logger.d("Halo $user");
     if (has) {
       if (user != null) {
         if (user.roles?.first == RoleEnum.keeper.name) {

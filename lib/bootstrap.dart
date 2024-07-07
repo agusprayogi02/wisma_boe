@@ -10,8 +10,8 @@ import 'presentation/pages/app_page.dart';
 class AppBlocObserver extends BlocObserver {
   @override
   Future<void> onChange(BlocBase bloc, Change change) async {
-    super.onChange(bloc, change);
     logger.d('onChange(${bloc.runtimeType}, change)');
+    super.onChange(bloc, change);
   }
 
   @override

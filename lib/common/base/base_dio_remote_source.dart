@@ -31,9 +31,10 @@ class BaseDioRemoteSource {
   }) async {
     try {
       if (isAuth) {
-        final token = await _session.hasSession;
+        final has = _session.hasSession;
+        final token = _session.token;
         // Vx.log('user: $user');
-        if (token) {
+        if (has) {
           _dio.options.headers.addAll({
             "Authorization": "Bearer $token",
           });
@@ -46,7 +47,7 @@ class BaseDioRemoteSource {
       final response = await request(_dio);
 
       if (response.statusCode == 401) {
-        await _session.deleteToken();
+        _session.deleteToken();
       }
       if (response.statusCode! >= 200 || response.statusCode! < 300) {
         final rest = isPaginate

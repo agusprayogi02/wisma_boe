@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 class SessionModel extends Equatable {
   final int? id;
   final String? name;
-  final List<String>? roles;
   final String? email;
+  final List<String>? roles;
   final String? accessToken;
 
   const SessionModel({
