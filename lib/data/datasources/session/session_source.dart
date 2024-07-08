@@ -27,7 +27,7 @@ class SessionSource {
   }
 
   void setUser(SessionModel user) {
-    shared.store(_key, jsonEncode(user.toMap()));
+    shared.store(_userKey, jsonEncode(user.toMap()));
   }
 
   void deleteToken() {

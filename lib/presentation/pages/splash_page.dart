@@ -8,6 +8,7 @@ import '../../data/datasources/session/session_source.dart';
 import '../../injection.dart';
 import '../components/components.dart';
 import '../theme/theme.dart';
+import 'home/admin/page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -27,8 +28,8 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> init() async {
     await 3.delayedSeconds;
-    final has = await locator<SessionSource>().hasSession;
-    final user = await locator<SessionSource>().user;
+    final has = locator<SessionSource>().hasSession;
+    final user = locator<SessionSource>().user;
     logger.d("Halo $user");
     if (has) {
       if (user != null) {
@@ -40,6 +41,9 @@ class _SplashPageState extends State<SplashPage> {
           return;
         } else if (user.roles?.first == RoleEnum.head.name) {
           context.go(HomeHeadPage.path);
+          return;
+        } else if (user.roles?.first == RoleEnum.admin.name) {
+          context.go(HomeAdminPage.path);
           return;
         }
       }

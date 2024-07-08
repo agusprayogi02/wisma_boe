@@ -28,6 +28,7 @@ class AuthRepository extends BaseRepository {
       ),
       onSuccess: (r) => r,
       onSaveToLocal: (data) async {
+        logger.d(data);
         session.setToken(data.accessToken ?? '');
         session.setUser(data);
       },

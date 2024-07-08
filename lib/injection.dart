@@ -4,6 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:next_starter/data/datasources/remote_datasources/participant_remote/participant_remote.dart';
+import 'package:next_starter/data/datasources/remote_datasources/participant_remote/participant_remote_impl.dart';
+import 'package:next_starter/data/repositories/participant_repository.dart';
 
 import 'application/auth/auth_cubit.dart';
 import 'application/bloc/pagination_bloc.dart';
@@ -56,4 +59,7 @@ Future<void> initializeDependencies(GlobalKey<NavigatorState> navigatorKey) asyn
   locator.registerSingleton<PostRemote>(PostRemoteImpl(locator.get(), locator.get()));
   locator.registerSingleton(PostRepository(locator.get()));
   locator.registerFactory(PaginationBloc.new);
+  // participant
+  locator.registerSingleton<ParticipantRemote>(ParticipantRemoteImpl(locator.get(), locator.get()));
+  locator.registerSingleton(ParticipantRepository(locator.get()));
 }
