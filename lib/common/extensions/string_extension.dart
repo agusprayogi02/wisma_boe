@@ -16,6 +16,7 @@ extension StringX on String {
   Color get randColor {
     var r = Random(hashCode);
     const chars = '0123456789ABC';
-    return HexColor('#${List.generate(6, (index) => chars[r.nextInt(chars.length)]).join()}');
+    return HexColor(
+        '#${List.generate(6, (index) => chars[r.nextInt(chars.length)]).join()}');
   }
 }

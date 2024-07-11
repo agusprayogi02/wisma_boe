@@ -98,7 +98,8 @@ class _OtpViewState extends State<OtpView> {
               Text(
                 'Masukkan kode verifikasi yang kami kirimkan kepada '
                 'Anda di: ${widget.email}',
-                style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[600]),
+                style: CustomTextTheme.paragraph1
+                    .copyWith(color: ColorTheme.neutral[600]),
               ),
               20.verticalSpace,
               ReactivePinPut(
@@ -114,7 +115,9 @@ class _OtpViewState extends State<OtpView> {
                       TextSpan(
                         text: 'Kirim Ulang',
                         style: TextStyle(
-                          color: showResend ? ColorTheme.primary : ColorTheme.neutral[800],
+                          color: showResend
+                              ? ColorTheme.primary
+                              : ColorTheme.neutral[800],
                           fontWeight: showResend ? FontWeight.bold : null,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -128,7 +131,8 @@ class _OtpViewState extends State<OtpView> {
                               : null,
                       ),
                     ],
-                    style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[900]),
+                    style: CustomTextTheme.paragraph1
+                        .copyWith(color: ColorTheme.neutral[900]),
                   ),
                 ),
               ),
@@ -149,7 +153,8 @@ class _OtpViewState extends State<OtpView> {
                   if (state is AuthLoading) {
                     context.showLoadingIndicator();
                   } else if (state is AuthError) {
-                    context.showSnackbar(message: state.message, error: true, isPop: true);
+                    context.showSnackbar(
+                        message: state.message, error: true, isPop: true);
                   } else if (state is AuthSuccess) {
                     context.hideLoading();
                     if (widget.isResetPassword) {
@@ -162,7 +167,8 @@ class _OtpViewState extends State<OtpView> {
                       );
                       return;
                     }
-                    context.route.replaceNamed(SuccessPage.path, pathParameters: {
+                    context.route
+                        .replaceNamed(SuccessPage.path, pathParameters: {
                       "message": state.message,
                     });
                   } else if (state is AuthSuccessAdd) {
@@ -194,7 +200,9 @@ class _OtpViewState extends State<OtpView> {
                             //   "otp": formState.rawValue['otp'],
                             // });
                             context.route.replaceNamed(SuccessPage.path,
-                                pathParameters: {"message": "Berhasil verifikasi OTP"});
+                                pathParameters: {
+                                  "message": "Berhasil verifikasi OTP"
+                                });
                           }
                         },
                         isEnable: formState.valid,

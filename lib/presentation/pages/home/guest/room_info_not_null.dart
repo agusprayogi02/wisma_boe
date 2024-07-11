@@ -80,20 +80,24 @@ class _RoomInfoNotNullState extends State<RoomInfoNotNull> {
               ),
               const SizedBox(width: 10),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(widget.hallName,
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600)),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 5),
                         Text(widget.roomType),
                         const SizedBox(height: 5),
-                        FittedBox(fit: BoxFit.scaleDown, child: Text("${widget.capacity} Orang")),
+                        FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text("${widget.capacity} Orang")),
                       ],
                     ),
                   ],

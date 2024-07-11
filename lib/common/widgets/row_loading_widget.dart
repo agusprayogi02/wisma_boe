@@ -8,7 +8,8 @@ class RowLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: isLeft ? MainAxisAlignment.start : MainAxisAlignment.center,
+      mainAxisAlignment:
+          isLeft ? MainAxisAlignment.start : MainAxisAlignment.center,
       children: const [
         SizedBox(
           height: 24,

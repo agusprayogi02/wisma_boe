@@ -20,7 +20,9 @@ extension ApiExceptionDioX on DioException {
           );
         } else if (code == 401) {
           return ApiException.unAuthorized(
-            response != null ? ApiUtils.parseResponseMessage(response!) : 'Unauthorized',
+            response != null
+                ? ApiUtils.parseResponseMessage(response!)
+                : 'Unauthorized',
           );
         } else if (code == 403) {
           return ApiException.serverException(
@@ -53,7 +55,9 @@ extension ApiExceptionDioX on DioException {
         return const ApiException.badCertificate();
       case DioExceptionType.badResponse:
         return ApiException.badResponse(
-          response != null ? ApiUtils.parseResponseMessage(response!) : 'Respon tidak valid!',
+          response != null
+              ? ApiUtils.parseResponseMessage(response!)
+              : 'Respon tidak valid!',
         );
       case DioExceptionType.unknown:
         if (response == null) {

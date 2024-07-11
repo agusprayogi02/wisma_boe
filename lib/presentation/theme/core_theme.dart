@@ -32,7 +32,8 @@ class AppCoreTheme {
     },
   );
 
-  static SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle.light.copyWith(
+  static SystemUiOverlayStyle systemUiOverlayStyle =
+      SystemUiOverlayStyle.light.copyWith(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     systemStatusBarContrastEnforced: true,
@@ -208,7 +209,8 @@ class AppCoreTheme {
       dividerColor: Colors.transparent,
       indicatorColor: primaryColor,
       indicatorSize: TabBarIndicatorSize.label,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
           return AppCoreColor.primary.focus;
         }
@@ -227,7 +229,8 @@ class AppCoreTheme {
     // CheckBox Button Theme
     checkboxTheme: CheckboxThemeData(
       splashRadius: 5.0,
-      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }
@@ -237,7 +240,8 @@ class AppCoreTheme {
     ),
     // Radio Button Theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
           return primaryColor;
         }

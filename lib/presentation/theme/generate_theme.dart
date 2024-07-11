@@ -20,6 +20,52 @@ class GenerateTheme {
         ),
       );
 
+  static InputDecoration inputDecorationRounded(String hint, Widget? prefix, Widget? suffix,
+          {bool label = false}) =>
+      InputDecoration(
+        errorBorder: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: const BorderSide(color: ColorTheme.statusRed, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: const BorderSide(color: ColorTheme.statusRed, width: 2),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: const BorderSide(color: ColorTheme.primary, width: 2),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: const BorderSide(color: ColorTheme.primary, width: 1),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: BorderSide(color: ColorTheme.neutral[200]!, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: 30.rounded,
+          borderSide: BorderSide(color: ColorTheme.neutral[200]!, width: 1),
+        ),
+        contentPadding: 12.all,
+        fillColor: ColorTheme.white,
+        filled: true,
+        suffixIcon: suffix,
+        hintText: hint,
+        labelText: label ? hint : null,
+        prefixIconColor: ColorTheme.neutral[400],
+        hintStyle: AppStyles.text16Px.copyWith(color: ColorTheme.neutral[400]),
+        focusColor: ColorTheme.primary,
+        prefixIcon: prefix != null
+            ? Padding(
+                padding: EdgeInsets.only(
+                  left: 12.w,
+                ),
+                child: prefix,
+              )
+            : null,
+      );
+
   static List<Widget> generateDots(int length, int index) {
     List<Widget> widgets = [];
 
@@ -48,7 +94,7 @@ class GenerateTheme {
         ),
       );
     }
-    
+
     return widgets;
   }
 }

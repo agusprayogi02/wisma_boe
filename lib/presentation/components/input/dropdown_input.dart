@@ -29,7 +29,8 @@ class DropdownInput<T extends Object> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String Function(Object)> messages = Constants.messageErrors;
+    final Map<String, String Function(Object)> messages =
+        Constants.messageErrors;
     messages.addAll(validationMessages);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,11 +44,13 @@ class DropdownInput<T extends Object> extends StatelessWidget {
               if (isRequiredText)
                 TextSpan(
                   text: "*",
-                  style: CustomTextTheme.caption.copyWith(color: ColorTheme.primary),
+                  style: CustomTextTheme.caption
+                      .copyWith(color: ColorTheme.primary),
                 ),
             ],
           ),
-          style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w700),
+          style:
+              CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w700),
         ),
         8.verticalSpace,
         ReactiveDropdownField<T>(
@@ -55,7 +58,8 @@ class DropdownInput<T extends Object> extends StatelessWidget {
               .map(
                 (e) => DropdownMenuItem<T>(
                   value: e['value'],
-                  child: Text(e['text'] ?? '-', style: CustomTextTheme.paragraph1),
+                  child:
+                      Text(e['text'] ?? '-', style: CustomTextTheme.paragraph1),
                 ),
               )
               .toList(),

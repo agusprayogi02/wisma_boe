@@ -64,8 +64,8 @@ class _AppPageState extends State<AppPage> {
               routeInformationParser: _appRouter.routeInformationParser,
               routerDelegate: _appRouter.routerDelegate,
               builder: (BuildContext context, Widget? child) {
-                ErrorWidget.builder =
-                    (FlutterErrorDetails details) => AppErrorView(details: details);
+                ErrorWidget.builder = (FlutterErrorDetails details) =>
+                    AppErrorView(details: details);
                 return child!;
               },
             ),

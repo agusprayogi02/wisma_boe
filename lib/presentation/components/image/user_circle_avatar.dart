@@ -32,7 +32,8 @@ class UserCircleAvatar extends StatelessWidget {
       url = baseUrl ?? 'https://api-kendali.eluxdev.space/storage/';
       url += image!;
     } else {
-      url = '${(image ?? '').split('://').first}://${(image ?? '').split('://').last}';
+      url =
+          '${(image ?? '').split('://').first}://${(image ?? '').split('://').last}';
     }
     return CachedNetworkImage(
       imageUrl: url,

@@ -63,7 +63,9 @@ class RegisterView extends StatelessWidget {
                 context.hideLoading();
                 context.route.goNamed(
                   OtpPage.path,
-                  pathParameters: {"email": form.controls['email']!.value.toString()},
+                  pathParameters: {
+                    "email": form.controls['email']!.value.toString()
+                  },
                 );
                 context.showSnackbar(message: state.message, isPop: false);
               }
@@ -77,11 +79,14 @@ class RegisterView extends StatelessWidget {
                       // context.read<AuthCubit>().register(formL.rawValue);
                       context.route.goNamed(
                         OtpPage.path,
-                        pathParameters: {"email": form.controls['email']!.value.toString()},
+                        pathParameters: {
+                          "email": form.controls['email']!.value.toString()
+                        },
                       );
                     },
                     title: "Daftar",
-                    isEnable: formL.valid && formL.control('unit_1').value != -1,
+                    isEnable:
+                        formL.valid && formL.control('unit_1').value != -1,
                   );
                 },
               );
@@ -156,7 +161,8 @@ class RegisterView extends StatelessWidget {
                 isRequiredText: true,
                 prefix: const Icon(Icons.key),
                 validationMessages: {
-                  ValidationMessage.minLength: (p0) => 'Password Minimal 8 karakter',
+                  ValidationMessage.minLength: (p0) =>
+                      'Password Minimal 8 karakter',
                 },
               ),
               18.verticalSpace,

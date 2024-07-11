@@ -58,17 +58,20 @@ class _TextInputState extends State<TextInput> {
               if (widget.isRequiredText)
                 TextSpan(
                   text: "*",
-                  style: CustomTextTheme.caption.copyWith(color: ColorTheme.statusRed),
+                  style: CustomTextTheme.caption
+                      .copyWith(color: ColorTheme.statusRed),
                 ),
             ],
           ),
-          style: CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w700),
+          style:
+              CustomTextTheme.paragraph1.copyWith(fontWeight: FontWeight.w700),
         ),
         6.verticalSpace,
         ReactiveTextField(
           keyboardType: widget.textInputType,
           formControlName: widget.formControlName,
-          style: CustomTextTheme.paragraph2.copyWith(color: ColorTheme.neutral[800]),
+          style: CustomTextTheme.paragraph2
+              .copyWith(color: ColorTheme.neutral[800]),
           decoration: GenerateTheme.inputDecoration(widget.hint).copyWith(
             suffixIcon: widget.suffix,
             prefixIcon: widget.prefix,

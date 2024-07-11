@@ -77,7 +77,8 @@ class ChangePasswordView extends StatelessWidget {
               ),
               Text(
                 'Kata sandi baru Anda harus berbeda dari kata sandi yang digunakan sebelumnya',
-                style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[600]),
+                style: CustomTextTheme.paragraph1
+                    .copyWith(color: ColorTheme.neutral[600]),
               ),
               20.verticalSpace,
               const PasswordInput(
@@ -101,10 +102,12 @@ class ChangePasswordView extends StatelessWidget {
                   if (state is AuthLoading) {
                     context.showLoadingIndicator();
                   } else if (state is AuthError) {
-                    context.showSnackbar(message: state.message, error: true, isPop: true);
+                    context.showSnackbar(
+                        message: state.message, error: true, isPop: true);
                   } else if (state is AuthSuccess) {
                     context.hideLoading();
-                    context.route.replaceNamed(SuccessPage.path, pathParameters: {
+                    context.route
+                        .replaceNamed(SuccessPage.path, pathParameters: {
                       "message": state.message,
                     });
                   }
@@ -121,7 +124,9 @@ class ChangePasswordView extends StatelessWidget {
                           //     .resetPassword(formState.rawValue);
                           context.route.replaceNamed(
                             SuccessPage.path,
-                            pathParameters: {"message": "Berhasil mengubah kata sandi"},
+                            pathParameters: {
+                              "message": "Berhasil mengubah kata sandi"
+                            },
                           );
                         },
                         isEnable: formState.valid,

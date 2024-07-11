@@ -46,5 +46,6 @@ class AppBarWisma extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight); // default AppBar height
+  Size get preferredSize =>
+      const Size.fromHeight(kToolbarHeight); // default AppBar height
 }

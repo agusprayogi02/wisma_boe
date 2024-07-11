@@ -62,13 +62,15 @@ class _QrScannerPageState extends State<QrScannerPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: ScannedBarcodeLabel(barcodes: scannerController.barcodes),
+                  child:
+                      ScannedBarcodeLabel(barcodes: scannerController.barcodes),
                 ),
               ),
               onDetect: (BarcodeCapture barcodes) {
                 scannerController.stop();
                 if (barcodes.barcodes.isNotEmpty) {
-                  Navigator.of(context).pop(barcodes.barcodes.first.displayValue ?? '');
+                  Navigator.of(context)
+                      .pop(barcodes.barcodes.first.displayValue ?? '');
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('No barcode found!'),

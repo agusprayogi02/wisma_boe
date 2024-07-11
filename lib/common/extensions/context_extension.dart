@@ -67,11 +67,13 @@ extension BuildContextX on BuildContext {
       builder: (context) => AlertDialog(
         content: Row(
           children: [
-            Icon(Icons.info_outline, size: 20.r, color: AppCoreColor.error.main),
+            Icon(Icons.info_outline,
+                size: 20.r, color: AppCoreColor.error.main),
             10.horizontalSpaceRadius,
             Text(
               message,
-              style: AppStyles.text14Px.copyWith(color: ColorTheme.neutral.shade600),
+              style: AppStyles.text14Px
+                  .copyWith(color: ColorTheme.neutral.shade600),
             ).expand(),
           ],
         ),
@@ -115,11 +117,13 @@ extension BuildContextX on BuildContext {
                   try {
                     await download.download(url, fileName: fileName);
                     showSnackbar(
-                      message: 'Berkas berhasil diunduh, cek folder "Download/$fileName"',
+                      message:
+                          'Berkas berhasil diunduh, cek folder "Download/$fileName"',
                     );
                   } catch (e) {
                     showSnackbar(
-                      message: 'Berkas berhasil diunduh, cek folder "Download/$fileName"',
+                      message:
+                          'Berkas berhasil diunduh, cek folder "Download/$fileName"',
                       error: true,
                     );
                   }

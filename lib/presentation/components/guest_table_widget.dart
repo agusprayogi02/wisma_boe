@@ -23,7 +23,8 @@ class GuestTable extends StatelessWidget {
               ),
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: Text(
                     guestList[i],
                   ),

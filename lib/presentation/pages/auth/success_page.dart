@@ -49,7 +49,8 @@ class SuccessPage extends StatelessWidget {
             ),
             Text(
               message,
-              style: CustomTextTheme.paragraph1.copyWith(color: ColorTheme.neutral[600]),
+              style: CustomTextTheme.paragraph1
+                  .copyWith(color: ColorTheme.neutral[600]),
             ),
           ],
         ),

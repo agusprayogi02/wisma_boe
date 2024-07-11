@@ -26,7 +26,7 @@ extension NumExtensionX on num {
 
   Radius get circular => Radius.circular(toDouble().r);
 
-  BorderRadiusGeometry get rounded => BorderRadius.circular(toDouble().r);
+  BorderRadius get rounded => BorderRadius.circular(toDouble().r);
 
   EdgeInsets get all => EdgeInsets.all(toDouble().r);
 

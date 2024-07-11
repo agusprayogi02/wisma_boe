@@ -25,10 +25,12 @@ class ApiUtils {
 
   static String parseResponseMessage(Response<dynamic> response) {
     if (response.data is String) {
-      return validationMessageError(jsonDecode(response.data)['message'], response.statusCode);
+      return validationMessageError(
+          jsonDecode(response.data)['message'], response.statusCode);
     }
     return validationMessageError(
-        response.data['message'] ?? 'Terjadi Error pada server', response.statusCode);
+        response.data['message'] ?? 'Terjadi Error pada server',
+        response.statusCode);
   }
 
   static String validationMessageError(String message, int? code) {
@@ -44,11 +46,13 @@ class ApiUtils {
 
   static String errorMessage(String msg) {
     if (msg.contains('longer')) {
-      msg = 'Tidak dapat menghubungkan ke server, periksa koneksi internet anda';
+      msg =
+          'Tidak dapat menghubungkan ke server, periksa koneksi internet anda';
     } else if (msg.toLowerCase().contains('no route to host')) {
       msg = 'Terjadi kesalahan pada server, silahkan coba beberapa saat lagi';
     } else if (msg.toLowerCase().contains('connection errored')) {
-      msg = 'Tidak dapat menghubungkan ke server, periksa koneksi internet anda';
+      msg =
+          'Tidak dapat menghubungkan ke server, periksa koneksi internet anda';
     }
     return msg;
   }

@@ -45,7 +45,8 @@ class _LoginPageState extends State<LoginPage> {
               if (state is AuthLoading) {
                 context.showLoadingIndicator();
               } else if (state is AuthError) {
-                context.showSnackbar(message: state.message, error: true, isPop: true);
+                context.showSnackbar(
+                    message: state.message, error: true, isPop: true);
               } else if (state is AuthSuccess) {
                 context.showSnackbar(message: state.message);
                 context.route.pushReplacement(SplashPage.path);
@@ -83,7 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                                 color: ColorTheme.primary,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () => context.route.goNamed(RegisterPage.path),
+                                ..onTap = () =>
+                                    context.route.goNamed(RegisterPage.path),
                             ),
                           ],
                         ),
@@ -145,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                         color: ColorTheme.primary,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.route.goNamed(ForgotPasswordPage.path),
+                        ..onTap = () =>
+                            context.route.goNamed(ForgotPasswordPage.path),
                     ),
                   ],
                 ),

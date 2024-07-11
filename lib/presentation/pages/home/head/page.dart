@@ -47,11 +47,13 @@ class _HomeHeadPageState extends State<HomeHeadPage> {
               backgroundColor: Colors.blue.shade300,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               elevation: 3,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7)),
             ),
             child: const Text(
               "Lihat Daftar Kamar",
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(
@@ -65,8 +67,10 @@ class _HomeHeadPageState extends State<HomeHeadPage> {
                 onTap: () {},
                 child: Text(
                   "Lihat Semua",
-                  style:
-                      Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blue.shade300),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.blue.shade300),
                 ),
               )
             ],
@@ -82,7 +86,8 @@ class _HomeHeadPageState extends State<HomeHeadPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dana Operasional', style: Theme.of(context).textTheme.titleSmall),
+                Text('Dana Operasional',
+                    style: Theme.of(context).textTheme.titleSmall),
                 //LineChart(lineChartData)
               ],
             ),
@@ -91,15 +96,18 @@ class _HomeHeadPageState extends State<HomeHeadPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Petugas Kebersihan", style: Theme.of(context).textTheme.titleLarge),
+              Text("Petugas Kebersihan",
+                  style: Theme.of(context).textTheme.titleLarge),
               InkWell(
                 onTap: () {
                   Navigator.popAndPushNamed(context, '/head/keeper');
                 },
                 child: Text(
                   "Lihat Semua",
-                  style:
-                      Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blue.shade300),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.blue.shade300),
                 ),
               )
             ],

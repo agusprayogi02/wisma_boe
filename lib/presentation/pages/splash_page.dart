@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
         } else if (user.roles?.first == RoleEnum.head.name) {
           context.go(HomeHeadPage.path);
           return;
-        } else if (user.roles?.first == RoleEnum.admin.name) {
+        } else if (user.roles?.first == RoleEnum.super_admin.name) {
           context.go(HomeAdminPage.path);
           return;
         }

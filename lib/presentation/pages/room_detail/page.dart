@@ -55,8 +55,12 @@ class RoomDetailPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('VC',
-                                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                            color: Colors.white, fontWeight: FontWeight.bold)),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold)),
                                   ],
                                 ))
                           ],
@@ -81,10 +85,8 @@ class RoomDetailPage extends StatelessWidget {
                     children: [
                       Text(
                         'Daftar Nama Tamu',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

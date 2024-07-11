@@ -20,6 +20,8 @@ class GeneralRoute {
       builder: (context, state) => const PostPage(),
     ),
     GoRoute(
-        path: ScanPage.path, name: ScanPage.path, builder: (context, state) => const ScanPage()),
+        path: ScanPage.path,
+        name: ScanPage.path,
+        builder: (context, state) => const ScanPage()),
   ];
 }

@@ -2,5 +2,5 @@ enum RoleEnum {
   keeper,
   guest,
   head,
-  admin,
+  super_admin,
 }

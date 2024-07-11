@@ -31,10 +31,8 @@ class ButtomBarHead extends StatelessWidget {
                 ),
               ),
               Text("Home",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold))
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold))
             ],
           ),
           Column(
@@ -56,10 +54,8 @@ class ButtomBarHead extends StatelessWidget {
                 ),
               ),
               Text("Kamar",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold))
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold))
             ],
           ),
           Column(
@@ -81,10 +77,8 @@ class ButtomBarHead extends StatelessWidget {
                 ),
               ),
               Text("Petugas",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold))
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold))
             ],
           ),
         ],

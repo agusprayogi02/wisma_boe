@@ -88,8 +88,9 @@ class _HomeKeeperPageState extends State<HomeKeeperPage> {
             decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.rectangle,
-                borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey,
@@ -118,11 +119,15 @@ class _HomeKeeperPageState extends State<HomeKeeperPage> {
                 color: AppCoreColor.success.main,
                 shape: BoxShape.rectangle,
                 borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
               ),
               child: const Text(
                 'Pindai',
-                style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),

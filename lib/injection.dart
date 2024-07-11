@@ -10,6 +10,7 @@ import 'package:next_starter/data/repositories/participant_repository.dart';
 
 import 'application/auth/auth_cubit.dart';
 import 'application/bloc/pagination_bloc.dart';
+import 'application/participant/participant_cubit.dart';
 import 'common/network/network_info.dart';
 import 'common/permission/permission.dart';
 import 'common/permission/permission_impl.dart';
@@ -61,5 +62,6 @@ Future<void> initializeDependencies(GlobalKey<NavigatorState> navigatorKey) asyn
   locator.registerFactory(PaginationBloc.new);
   // participant
   locator.registerSingleton<ParticipantRemote>(ParticipantRemoteImpl(locator.get(), locator.get()));
-  locator.registerSingleton(ParticipantRepository(locator.get()));
+  locator.registerSingleton(ParticipantRepository(locator.get(), locator.get()));
+  locator.registerFactory(ParticipantCubit.new);
 }

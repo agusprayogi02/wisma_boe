@@ -81,6 +81,8 @@ dependencies:
   top_snackbar_flutter: ^3.1.0
   flutter_localizations:
     sdk: flutter
+  
+  infinite_scroll_pagination: ^4.0.0
   # lecle_downloads_path_provider: ^0.0.2+8
 
   # Local Database
@@ -123,6 +125,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/icon/
+    - assets/img/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

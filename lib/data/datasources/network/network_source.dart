@@ -11,7 +11,8 @@ abstract class ApiService {
     final dio = Dio(
       BaseOptions(
         // baseUrl: 'https://cuaca-gempa-rest-api.vercel.app/',
-        baseUrl: Flavor.I.getString(Keys.apiUrl) ?? 'https://jsonplaceholder.typicode.com/',
+        baseUrl: Flavor.I.getString(Keys.apiUrl) ??
+            'https://jsonplaceholder.typicode.com/',
         sendTimeout: const Duration(minutes: 3),
         connectTimeout: const Duration(minutes: 3),
         receiveTimeout: const Duration(minutes: 3),

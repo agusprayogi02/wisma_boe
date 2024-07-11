@@ -33,7 +33,7 @@ class BaseDioRemoteSource {
       if (isAuth) {
         final has = _session.hasSession;
         final token = _session.token;
-        // Vx.log('user: $user');
+        // logger.d('user: $token');
         if (has) {
           _dio.options.headers.addAll({
             "Authorization": "Bearer $token",
@@ -76,9 +76,7 @@ class BaseDioRemoteSource {
       //   unAuthorized: (message) async {
       //     logger.d(message);
       //     if (message != "Password atau No HP salah!") {
-      //       await _session.deleteToken();
-      //       await _session.deleteUserData();
-      //       locator<AppRouter>().pushAndPopUntil(const LoginRoute(), predicate: (r) => false);
+      //       _session.deleteToken();
       //       return;
       //     }
       //   },

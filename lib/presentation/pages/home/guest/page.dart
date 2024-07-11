@@ -83,14 +83,17 @@ class _HomeGuestPageState extends State<HomeGuestPage> {
                   thickness: 5,
                   trackVisibility: false,
                   interactive: true,
-                  child: ListView(scrollDirection: Axis.vertical, children: const [
+                  child:
+                      ListView(scrollDirection: Axis.vertical, children: const [
                     HomeNotificationCard('Pendaftaran Akun Berhasil'),
                     SizedBox(height: 15),
                     HomeNotificationCard('Selamat Datang di Wisma BOE'),
                     SizedBox(height: 15),
-                    HomeNotificationCard('Silahkan pindai QR Code sesuai kamar'),
+                    HomeNotificationCard(
+                        'Silahkan pindai QR Code sesuai kamar'),
                     SizedBox(height: 15),
-                    HomeNotificationCard('Silahkan pindai QR Code sesuai kamar'),
+                    HomeNotificationCard(
+                        'Silahkan pindai QR Code sesuai kamar'),
                   ]),
                 )),
           ],

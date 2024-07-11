@@ -22,7 +22,8 @@ class CheckBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 20, bottom: 20),
               alignment: Alignment.center,
               child: Image.asset(
                 'img/checklist.png',
@@ -30,7 +31,8 @@ class CheckBottomSheet extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 50),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 20, bottom: 50),
               child: const Text(
                 "Check In Berhasil!",
                 style: TextStyle(

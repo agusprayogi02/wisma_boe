@@ -16,7 +16,9 @@ class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
     final scanWindow = Rect.fromCenter(
-        center: MediaQuery.sizeOf(context).center(Offset.zero), width: 200, height: 200);
+        center: MediaQuery.sizeOf(context).center(Offset.zero),
+        width: 200,
+        height: 200);
     return const Scaffold(
       appBar: AppBarWisma(
         namePage: "Pindai Kode QR",

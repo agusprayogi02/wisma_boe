@@ -37,7 +37,8 @@ class Storage extends StorageInterface {
   }) : super();
 
   @override
-  Future<File> download(String url, {bool isTemp = false, String? fileName}) async {
+  Future<File> download(String url,
+      {bool isTemp = false, String? fileName}) async {
     // Download file from uri with dio return File
     String fName = fileName ?? p.basenameWithoutExtension(url);
     fName = fName.replaceAll('/', '-');
@@ -78,7 +79,8 @@ class Storage extends StorageInterface {
   }
 
   @override
-  Future<List<File>> pickFiles({List<String>? extensions, String? label}) async {
+  Future<List<File>> pickFiles(
+      {List<String>? extensions, String? label}) async {
     try {
       final picks = await openFiles(
         acceptedTypeGroups: [

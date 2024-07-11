@@ -19,7 +19,8 @@ class ResultPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 20, bottom: 20),
               alignment: Alignment.center,
               child: Image.asset(
                 'img/checklist.png',
@@ -27,7 +28,8 @@ class ResultPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 50),
+              margin: const EdgeInsets.only(
+                  left: 20, right: 20, top: 20, bottom: 50),
               child: Column(
                 children: [
                   Text(
@@ -64,10 +66,8 @@ class ResultPage extends StatelessWidget {
               ),
               child: Text(
                 'Selesai',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ],
