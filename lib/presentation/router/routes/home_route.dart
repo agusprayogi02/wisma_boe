@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:next_starter/data/models/participant_model.dart';
 import 'package:next_starter/presentation/pages/home/admin/page.dart';
 import 'package:next_starter/presentation/pages/home/admin/participant/detail_page.dart';
 
@@ -29,7 +30,9 @@ class HomeRoute {
     GoRoute(
       path: ParticipantDetailPage.path,
       name: ParticipantDetailPage.path,
-      builder: (context, state) => const ParticipantDetailPage(),
+      builder: (context, state) => ParticipantDetailPage(
+        item: state.extra as ParticipantModel,
+      ),
     ),
   ];
 }

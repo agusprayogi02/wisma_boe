@@ -10,7 +10,7 @@ class ParticipantModel extends Equatable implements BaseModel {
   final DateTime? klsTglCheckout;
   final String? nik;
   final String? nama;
-  final String? tanggalLahir;
+  final DateTime? tanggalLahir;
   final String? nip;
   final String? jenisKelamin;
   final int? idXpb;
@@ -52,7 +52,8 @@ class ParticipantModel extends Equatable implements BaseModel {
           : DateTime.parse(json['kls_tgl_checkout'] as String),
       nik: json['nik'] as String?,
       nama: json['nama'] as String?,
-      tanggalLahir: json['tanggal_lahir'] as String?,
+      tanggalLahir:
+          json['tanggal_lahir'] == null ? null : DateTime.parse(json['tanggal_lahir'] as String),
       nip: json['nip'] as String?,
       jenisKelamin: json['jenis_kelamin'] as String?,
       idXpb: json['id_xpb'] as int?,
@@ -92,7 +93,7 @@ class ParticipantModel extends Equatable implements BaseModel {
     DateTime? klsTglCheckout,
     String? nik,
     String? nama,
-    String? tanggalLahir,
+    DateTime? tanggalLahir,
     String? nip,
     String? jenisKelamin,
     int? idXpb,
